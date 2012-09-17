@@ -1,5 +1,8 @@
 <?php
 /*
+ * Custom Post Type and Taxonomies functiona
+ * actions are commented by default 
+ * 
  * 1.=Custom Post Types
  * 2.=Custom Taxonomies
  */
@@ -8,7 +11,7 @@
  * 1.=Custom Post Types
  */
 // =Photos Post
-add_action('init', 'custom_photos_init');
+// add_action('init', 'custom_photos_init');
 
 function custom_photos_init() {
     $testimonials_labels = array(
@@ -47,7 +50,7 @@ function custom_photos_init() {
  */
 
 //hook into the init action and call create_book_taxonomies when it fires
-add_action( 'init', 'create_theme_taxonomies', 0 );
+//add_action( 'init', 'create_theme_taxonomies', 0 );
 
 //create two taxonomies, genres and writers for the post type "book"
 function create_theme_taxonomies() 
@@ -103,4 +106,3 @@ function create_theme_taxonomies()
     'rewrite' => array( 'slug' => 'writer' ),
   ));
 }
-?>

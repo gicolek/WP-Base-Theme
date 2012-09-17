@@ -1,7 +1,8 @@
 <?php
-
 /**
- * Options page using Settings API
+ * Options page using Settings API - no error callback used yet
+ * 
+ * TODO: Add Error Callback
  */
 function skeleton_admin_options_page() {
     /*
@@ -16,6 +17,20 @@ function skeleton_admin_options_page() {
             echo "<div class='updated'><p>Theme settings updated successfully.</p></div>";
         }
         ?>
+        
+        <?php
+        // http://codex.wordpress.org/Function_Reference/get_settings_errors
+        $errors = get_settings_errors();
+
+        if ( $errors ) {
+            echo "<div class='error'>";
+            foreach ( $errors as $error ) {
+                echo $error['message'];
+            }
+            echo "</div>";
+        }
+        ?>
+        
         <form action="options.php" method="post">
             <?php
             settings_fields( 'skeleton_options' );
@@ -37,13 +52,14 @@ function plugin_admin_init() {
 
     add_settings_section( 'skeleton_main', 'Main Settings', 'skeleton_section_text', 'skeleton_settings' );
 
-    add_settings_field( 'skeleton_copyright', 'Copyright Text', 'skeleton_copyright', 'skeleton_settings', 'skeleton_main' );
-    add_settings_field( 'skeleton_address', 'Address Text', 'skeleton_address_text', 'skeleton_settings', 'skeleton_main' );
+    add_settings_field( 'skeleton_address', 'Aposta Home Text', 'skeleton_address_text', 'skeleton_settings', 'skeleton_main' );
+    add_settings_field( 'skeleton_copyright', 'Skeleton Copyrightkele', 'skeleton_copyright', 'skeleton_settings', 'skeleton_main' );
+    
     
 }
 
 function skeleton_section_text() {
-    echo '<p>Change the footer copyright text here.</p>';
+    echo '<p>Change the footer about text here.</p>';
 }
 
 function skeleton_copyright() {
@@ -60,13 +76,13 @@ function skeleton_copyright() {
 function skeleton_address_text() {
      $options = get_option( 'skeleton_options' );
     
-     if(!empty($options['skeleton_copyright'])){
-        echo "<textarea id='skeleton_address' name='skeleton_options[skeleton_address]' cols='80'/>{$options['skeleton_address']}</textarea>";  
-    }
-    else
-        echo "<textarea id='skeleton_address' name='skeleton_options[skeleton_address]' /></textarea>";
-  
-   
+     $settings = array('textarea_name' => 'skeleton_options[skeleton_address]', 'media_buttons' => false, 'wpautop' => true);
+     
+     if(!empty($options['skeleton_address'])){
+         wp_editor($options['skeleton_address'],'skeleton_addres', $settings);
+     }
+     else
+         wp_editor('About Secret Agent','skeleton_addres', $settings);
 
 }
 
@@ -74,7 +90,9 @@ function skeleton_options_validate( $input ) {
     $valid = array( );
 
     $valid['skeleton_copyright'] = sanitize_text_field( $input['skeleton_copyright'] );
-    $valid['skeleton_address'] = sanitize_text_field( esc_html($input['skeleton_address']) );
+    $valid['skeleton_address'] = $input['skeleton_address'];
+    
+    // add_settings_error( 'secreta_about', 'settings_updated', 'error fucker' );
     return $valid;
 }
 
@@ -84,4 +102,3 @@ function skeleton_options_page() {
 
     add_theme_page( 'Theme Options', 'Theme Options', 'manage_options', 'skeleton_settings', 'skeleton_admin_options_page' );
 }
-?>

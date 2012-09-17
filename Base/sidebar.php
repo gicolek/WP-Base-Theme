@@ -1,6 +1,7 @@
 <?php
 /*
- * Template for displaying sidebar with widgets, if not defined, will output default content
+ * Bare Bones for the Sidebar
+ * Dummy content added 4 fun.
  */
 ?>
 

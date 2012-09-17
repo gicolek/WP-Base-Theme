@@ -1,11 +1,7 @@
 <?php
 /**
- * The template for displaying Search Pages.
- * Todo: fix style
- * Works like for Twenty Eleven
- * 
- * @package WordPress
- * @subpackage Skeleton
+ * Bare Bones of a search page
+ * Adds some error info, uses WP built in functions etc.
  */
 
 get_header();
@@ -16,7 +12,7 @@ get_header();
         <?php get_search_query(); ?>
 
         <?php while ( have_posts() ) : the_post(); ?>
-            
+            <?php /* TODO: post formats not yet implemented! */ ?>
         <?php get_template_part( 'content', get_post_format() ); ?>
 
         <?php endwhile; // end of the loop.  ?>

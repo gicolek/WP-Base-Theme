@@ -1,6 +1,5 @@
 <?php
 /**
- * TODO: correct comments style to match the design
  * The template for displaying Comments.
  *
  * Comments are modified via $defaults array defined at the bottom
@@ -10,6 +9,8 @@
  * 
  * @package WordPress
  * @subpackage Skeleton
+ * 
+ * (Yeah I copied this code from Twenty Eleven - no need to play Sherlock Holmes)
  */
 ?>
 
@@ -26,15 +27,15 @@ endif;
 
 <?php if ( have_comments() ) : ?>
 
-        <?php
-        /*
-         * List comments acording to custom_comment function specified 
-         * in commentstemplate.php file
-         */
-        ?>
-        <?php wp_list_comments( array( 'callback' => 'custom_comment' ) ); ?>
+    <?php
+    /*
+     * List comments acording to custom_comment function specified 
+     * in commentstemplate.php file
+     */
+    ?>
+    <?php wp_list_comments( array( 'callback' => 'custom_comment' ) ); ?>
 
-         <?php
+    <?php
     /*
      * Alter default values of form field
      * Name, Author and URL are edited in functions.php via
@@ -55,15 +56,15 @@ endif;
         'label_submit' => __( 'Comment' ),
     );
     ?>
-        
-            <?php comment_form( $defaults ); ?>
-        
+
+    <?php comment_form( $defaults ); ?>
+
     <?php
-    /* If there are no comments and comments are closed, let's leave a little note, shall we?
-     * But we don't want the note on pages or post types that do not support comments.
-     */
-    elseif (!comments_open() &&!is_page() && post_type_supports( get_post_type(), 'comments' ) ) :
+/* If there are no comments and comments are closed, let's leave a little note, shall we?
+ * But we don't want the note on pages or post types that do not support comments.
+ */
+elseif ( !comments_open() && !is_page() && post_type_supports( get_post_type(), 'comments' ) ) :
     ?>
     Comments closed
-    <?php endif; ?>
+<?php endif; ?>
 

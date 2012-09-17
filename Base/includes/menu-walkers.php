@@ -1,6 +1,6 @@
 <?php
 /*
- * 1.=Custom Walker Templates for the menus 
+ * 1.=Custom Walker Templates for the menus
  */
 
 /* 1.=Custom walkers for the menus 
@@ -76,9 +76,6 @@ class MINIFY_Clean_Walker_Nav extends Walker {
         }
  
         function end_el(&$output, $item, $depth) {
-                $output .= "kurwy</li>\n";
+                $output .= "</li>\n";
         }
 }
-?>
-
-

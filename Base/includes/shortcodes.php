@@ -14,8 +14,3 @@ function p_shortcode( $atts = null, $content = null ) {
 }
 
 add_shortcode( 'p', 'p_shortcode' );
-
-
-
-
-?>

@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Embed Maps getting all the data from the query string and adding it to an iframe 
  * Credit goes to http://wordpress.org/extend/plugins/google-maps-embed/
@@ -54,4 +53,3 @@ function custom_embed_google_map( $atts ) {
 
     return $return;
 }
-?>

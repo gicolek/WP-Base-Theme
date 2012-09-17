@@ -1,5 +1,7 @@
 <?php
 /*
+ * Set up file, with partially commented code - these functions are usually
+ * similar across all Themes
  * 1.=Editable navigation menus
  * 2.=Widget support
  * 3.=Post Thumbnails and Post Formats
@@ -8,6 +10,7 @@
  * 6.=PIE. htc stuff COMMENTED
  * 7.=Default editor COMMENTED
  * 8.=Excerpt more   COMMENTED
+ * 9.=String word limit helper function
  */
 
 /* 1.=Editable navigation menus 
@@ -40,14 +43,15 @@ add_action( 'widgets_init', 'theme_sidebar_widgets_init' );
 --------------------------------------------- */
 add_theme_support( 'post-thumbnails' );
 add_theme_support( 'post-formats', array( 'video' ));
+
 /* 4.=Automatic feed links, as suggested by codex */
 add_theme_support( 'automatic-feed-links' );
 
 /* 5.=Remove meta tag generator from the source view */
 remove_action( 'wp_head', 'wp_generator' );
 
-
-  function css_pie ( $vars ) {
+// Include pie.htc according to http://www.peterrknight.com/using-css3-pie-with-wordpress-plugins-and-themes/
+ /* function css_pie ( $vars ) {
   $vars[] = 'pie';
   return $vars;
   }
@@ -61,7 +65,7 @@ remove_action( 'wp_head', 'wp_generator' );
   }
   }
   add_action( 'template_redirect', 'load_pie' );
-
+*/
 
 /* 7.=Default editor 
   add_filter( 'wp_default_editor', create_function('', 'return "html";'), 99999 );
@@ -73,4 +77,13 @@ remove_action( 'wp_head', 'wp_generator' );
   }
   add_filter('excerpt_more', 'new_excerpt_more');
  */
-?>
+  
+  /* 9.=Strong Word Limit Limit the number of Words of a given string 
+   * TODO: Replace the default excerpts functionality, which sucks
+   */
+
+  function string_word_limit($str, $length) {
+    $str = strip_tags( $str );
+    $str = explode( " ", $str );
+    return implode( " ", array_slice( $str, 0, $length ) );
+} 

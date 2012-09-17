@@ -121,5 +121,3 @@ class Testimonials_Widget extends WP_Widget {
 // class Testimonials_Widget
 
 add_action( 'widgets_init', create_function( '', 'register_widget( "testimonials_widget" );' ) );
-
-?>

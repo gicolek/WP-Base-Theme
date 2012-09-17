@@ -1,9 +1,6 @@
 <?php
 /**
- * The template for displaying search forms in x-portfolio
- *
- * @package WordPress
- * @subpackage x-portfolio
+ * SearchForm Template - uses some dummy HTML
  */
 ?>
 
