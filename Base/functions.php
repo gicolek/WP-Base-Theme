@@ -91,5 +91,6 @@ function setPostViews($postID) {
     }
 }
 
+
 /* Stop adding <p> in excerpt */
 remove_filter( 'the_excerpt', 'wpautop' );
