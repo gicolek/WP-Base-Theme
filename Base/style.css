@@ -1,12 +1,12 @@
 /*
 Theme Name: Skeleton
-Theme URI: 
-Author: Rafal Gicgier 
+Theme URI:
+Author: Rafal Gicgier
 Author URI: http://rafalgicgier.pl
 Description: Skeleton theme made by rafalgic
 Version: 1
-License: 
-License URI: 
+License:
+License URI:
 Tags: featured image, post types, html5, boilerplate
 */
 
@@ -313,42 +313,31 @@ a img.aligncenter {
     padding:0 4px 5px;
 }
 
-/*  =WordPress generated custom classes 
+/*  =WordPress generated custom classes
 -------------------------------------------------------------- */
 .error404 {
-    
+
 }
 
 .home {
-    
+
 }
 
 .blog {
-    
+
 }
 
 .single {
-    
+
 }
 
 .page {
-    
+
 }
 
 .archive {
-    
+
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -359,8 +348,9 @@ a img.aligncenter {
    ========================================================================== */
 
 @media only screen and (min-width: 35em) {
-  /* Style adjustments for viewports that meet the condition */
+
 }
+
 
 
 /* ==|== non-semantic helper classes ========================================
