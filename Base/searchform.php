@@ -1,12 +1,14 @@
 <?php
-/**
- * SearchForm Template - uses some dummy HTML
+/*
+ * Skeleton Theme: Search form
  */
 ?>
 
 <div id="search-wrap">
-    <form method="get" id="commentform" action="<?php echo esc_url( home_url( '/' ) ); ?>">
-        <label for="name-txt">Search page launch</label> <input type="text" class="field" name="s" id="s" value="" id="search"/>
-        <input type="submit" class="submit button-search" name="submit" id="searchsubmit" value="Search" />
+    <form method="get" id="search-form" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+        <label for="search">Search page launch</label>
+        <input type="text" class="input" name="q" value="" id="search"/>
+        <button type="submit" class="submit button-search">Search</button>
     </form>
 </div>
+<!-- / search-wrap -->

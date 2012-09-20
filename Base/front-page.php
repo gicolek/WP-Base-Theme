@@ -1,16 +1,21 @@
 <?php
 /**
- * Template for Front Page
+ * Skeleton Theme: Front Page
+ *
  * Can be used for Landing Page
  */
-get_header();
-?>
+get_header(); ?>
 
 <?php if ( have_posts() ) : ?>
+
     <?php while ( have_posts() ) : the_post(); ?>
+
        <?php get_template_part('content','single'); ?>
-    <?php endwhile; // end of the loop.   ?>
+
+    <?php endwhile; ?>
+
 <?php else : ?>
+
 <?php endif; ?>
 
 <?php get_sidebar(); ?>
