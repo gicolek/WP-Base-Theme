@@ -25,7 +25,7 @@ class Skeleton_Theme_Config {
 	 * @todo add WP default auto page loader
 	 * @todo change to __construct	
 	 */
-	public function init($args = array( )) {
+	function __construct($args = array( )) {
 
 		$args = array_merge(
 				array(
@@ -89,6 +89,7 @@ class Skeleton_Theme_Config {
 	 * @todo check the code foreach
 	 * @todo add functionality to deregister automatical scripts
 	 * @todo change foreach to $handle => $script
+	 * @todo debug
 	 */
 	public function load_scripts() {
 
