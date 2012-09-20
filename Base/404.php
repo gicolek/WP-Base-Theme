@@ -1,10 +1,14 @@
 <?php
 /**
- * Bare bones of 404 page for the Skeleton Theme
+ * Skeleton Theme: 404 page
  */
-get_header();
-?>
+get_header(); ?>
 
-<?php /* add nothing found / searchform etc info */ ?>
+<?php
+/*
+ * add nothing found / searchform etc info
+ * get_search_form() http://codex.wordpress.org/Function_Reference/get_search_form
+ */
+?>
 
 <?php get_footer(); ?>

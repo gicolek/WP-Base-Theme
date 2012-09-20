@@ -1,13 +1,10 @@
 <?php
 /**
- * Template for archive pages
- * 
+ * Skeleton Theme: Archive page
  */
-get_header();
-?>
+get_header(); ?>
 
 <?php /* print archive info here */ ?>
-
 
 <?php if ( have_posts() ) : ?>
 
@@ -23,10 +20,7 @@ get_header();
 
 <?php endif; ?>
 
-<?php
-/* add pagination if needed here*/ 
-?>
-
+<?php /* add pagination if needed here */ ?>
 
 <?php get_sidebar(); ?>
 <?php get_footer(); ?>

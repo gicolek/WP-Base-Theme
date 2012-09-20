@@ -3,13 +3,13 @@
  * The template for displaying Comments.
  *
  * Comments are modified via $defaults array defined at the bottom
- * and functions php via add_filter( 'comment_form_default_fields', 'custom_comment_fields' ); hook 
- * 
+ * and functions php via add_filter( 'comment_form_default_fields', 'custom_comment_fields' ); hook
+ *
  * TODO: http://codex.wordpress.org/Function_Reference/wp_list_commentss
- * 
+ *
  * @package WordPress
  * @subpackage Skeleton
- * 
+ *
  * (Yeah I copied this code from Twenty Eleven - no need to play Sherlock Holmes)
  */
 ?>
@@ -17,19 +17,19 @@
 <?php if ( post_password_required() ) : ?>
     This post is password protected. Enter the password to view any comments.
     <?php
-    /* Stop the rest of comments.php from being processed,
+    /*
+     * Stop the rest of comments.php from being processed,
      * but don't kill the script entirely -- we still have
      * to fully load the template.
      */
     return;
-endif;
-?>
+endif; ?>
 
 <?php if ( have_comments() ) : ?>
 
     <?php
     /*
-     * List comments acording to custom_comment function specified 
+     * List comments acording to custom_comment function specified
      * in commentstemplate.php file
      */
     ?>
@@ -55,16 +55,17 @@ endif;
         'cancel_reply_link' => __( 'Cancel comment' ),
         'label_submit' => __( 'Comment' ),
     );
+
+    comment_form( $defaults );
     ?>
 
-    <?php comment_form( $defaults ); ?>
-
-    <?php
-/* If there are no comments and comments are closed, let's leave a little note, shall we?
+<?php
+/*
+ * If there are no comments and comments are closed, let's leave a little note, shall we?
  * But we don't want the note on pages or post types that do not support comments.
  */
-elseif ( !comments_open() && !is_page() && post_type_supports( get_post_type(), 'comments' ) ) :
-    ?>
+?>
+<?php elseif ( !comments_open() && !is_page() && post_type_supports( get_post_type(), 'comments' ) ) : ?>
     Comments closed
 <?php endif; ?>
 
