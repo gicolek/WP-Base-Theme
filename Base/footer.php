@@ -1,6 +1,10 @@
 <?php
 /**
- * Skeleton Theme: Footer
+ * Base Theme: Sample footer File
+ *
+ * @package WordPress
+ * @subpackage Base Theme
+ * @author Rafal Gicgier rafal@x-team.com
  */
 ?>
 

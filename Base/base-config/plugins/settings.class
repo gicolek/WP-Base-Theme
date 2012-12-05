@@ -1,0 +1,199 @@
+<?php
+/**
+ * Base Theme Settings Class, which facilitates
+ * creation of Theme Options Page doing so semi-automatically
+ * given a config array
+ * 
+ * sample - see functions.php
+ *  
+ * @package WordPress
+ * @subpackage Base Theme
+ * @author Rafal Gicgier rafal@x-team.com
+ */
+class Base_Settings {
+
+	private $options = array( );
+
+	function __construct($args = array( )) {
+
+		$this->options = $args;
+
+		$args = array_merge(
+				array(
+			'config_file' => TEMPLATEPATH . DIRECTORY_SEPARATOR . 'base-config/config.php',
+				), $args
+		);
+
+		add_action( 'admin_init', array( $this, 'admin_init' ) );
+		add_action( 'admin_menu', array( $this, 'options_page' ) );
+	}
+
+	/**
+	 * Generates Backend Page for options
+	 * 
+	 * @hook add_theme_page
+	 */
+	public function do_options_page() {
+		?>
+
+		<div class="wrap">
+			<?php
+			if ( isset( $_GET['settings-updated'] ) ) {
+				echo "<div class='updated'><p>Theme settings updated successfully.</p></div>";
+			}
+			?>
+
+			<?php
+			// @todo http://codex.wordpress.org/Function_Reference/get_settings_errors
+			$errors = get_settings_errors();
+
+			if ( $errors ) {
+				echo "<div class='error'>";
+				foreach ( $errors as $error ) {
+					echo $error['message'];
+				}
+				echo "</div>";
+			}
+			?>
+
+			<form action="options.php" method="post">
+				<?php
+				settings_fields( 'base_options' );
+				do_settings_sections( 'base_settings' );
+				?>
+				<br />
+				<input name="base_options[submit]" type="submit" class="button-primary" value="<?php esc_attr_e( 'Save Settings', 'base' ); ?>" />
+			</form>
+		</div>
+
+		<?php
+	}
+
+	/**
+	 * Utility that registers setting, adds setting section and adds field for each
+	 * field provided through config array
+	 * 
+	 * @hook admin_init
+	 */
+	function admin_init() {
+
+		register_setting( 'base_options', 'base_options', array( $this, 'options_validate' ) );
+
+		add_settings_section( 'base_main', 'Main Settings', array( $this, 'options_text' ), 'base_settings' );
+
+		foreach ( $this->options as $option ) {
+			add_settings_field( $option['name'], $option['desc'], array( $this, 'options_generate_fields' ), 'base_settings', 'base_main', $option );
+		}
+	}
+
+	/**
+	 * Generate section's text 
+	 */
+	function options_text() {
+		echo '<p>Change the footer about text here.</p>';
+	}
+
+	/**
+	 * Generates fields for each option specified
+	 * 
+	 * @param {array of strings} $option 
+	 */
+	function options_generate_fields($option) {
+
+		if ( $option['type'] == 'text' ) {
+			$this->generate_text_field( $option );
+		} else if ( $option['type'] == 'dropdown_pages' ) {
+			$this->generate_dropdown_pages_field( $option );
+		} else if ( $option['type'] == 'wp_editor' ) {
+			$this->generate_wp_editor( $option );
+		} else {
+			// @todo throw an error?
+		}
+	}
+
+	/**
+	 * Generates text field
+	 * 
+	 * @param {array of strings} $option 
+	 */
+	function generate_text_field($option) {
+		$options = get_option( 'base_options' );
+		if ( !empty( $options[$option['name']] ) ) {
+			echo "<input id='{$option['name']}' name='base_options[{$option['name']}]' size='80' type='text' value='{$options[$option['name']]}' />";
+		}
+		else
+			echo "<input id='{$option['name']}' name='base_options[{$option['name']}]' size='80' type='text' value='' />";
+	}
+
+	/**
+	 * Generates dropdown of all listed pages
+	 * 
+	 * @param {array of strings} $option 
+	 */
+	function generate_dropdown_pages_field($option) {
+		$options = get_option( 'base_options' );
+
+		if ( !empty( $options[$option['name']] ) ) {
+			$args = array(
+				'selected' => $options[$option['name']],
+				'name' => "base_options[{$option['name']}]",
+			);
+			wp_dropdown_pages( $args );
+		} else {
+			$args = array(
+				'name' => "base_options[{$option['name']}]",
+			);
+			wp_dropdown_pages( $args );
+		}
+	}
+
+	/**
+	 * Generates wp_editor textarea
+	 * 
+	 * @param {array of strings} $option 
+	 */
+	function generate_wp_editor($option) {
+		$options = get_option( 'base_options' );
+
+		$settings = array( 'textarea_name' => "base_options[{$option['name']}]", 'media_buttons' => false, 'wpautop' => true );
+
+		if ( !empty( $options[$option['name']] ) ) {
+			wp_editor( $options[$option['name']], $option['name'], $settings );
+		}
+		else
+			wp_editor( '', $option['name'], $settings );
+	}
+
+	/**
+	 * Validates the input 
+	 * 
+	 * @param {mixed} $input
+	 * @return {mixed}
+	 */
+	function options_validate($input) {
+		$valid = array( );
+
+		foreach ( $this->options as $option ) {
+			if ( $option['type'] == 'text' )
+				$valid[$option['name']] = sanitize_text_field( $input[$option['name']] );
+			else if ( $option['type'] == 'dropdown_pages' ) {
+				$valid[$option['name']] = $input[$option['name']];
+			} else if ( $option['type'] == 'wp_editor' ) {
+				$valid[$option['name']] = $input[$option['name']];
+			}
+			// @todo if
+		}
+		// add_settings_error( 'secreta_about', 'settings_updated', 'error fucker' );
+		return $valid;
+	}
+
+	/**
+	 * Adds theme options page
+	 * 
+	 * @hook admin_menu
+	 */
+	function options_page() {
+		add_theme_page( 'Theme Options', 'Theme Options', 'manage_options', 'base_settings', array( $this, 'do_options_page' ) );
+	}
+
+}

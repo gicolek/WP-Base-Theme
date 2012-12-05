@@ -1,9 +1,10 @@
 <?php
 /**
- * Skeleton Theme: Header
+ * Base Theme: Header File
  *
- * Uses some dummy HTML, that's usually similar for each project
- * Has pingback, shortcut icon and profiler uncommented by default
+ * @package WordPress
+ * @subpackage Base Theme
+ * @author Rafal Gicgier rafal@x-team.com
  */
 ?><!DOCTYPE html>
 <!--[if IE 7]> <html class="ie7 oldie" <?php language_attributes(); ?>> <![endif]-->
@@ -58,15 +59,14 @@
 
     <?php
     /* stored here to remind us on how to use a custom walker */
-    $walker = new MINIFY_Clean_Walker_Nav();
+    // $walker = new MINIFY_Clean_Walker_Nav();
     wp_nav_menu( array(
         'theme_location' => 'navigation-top',
         'container' => 'false',
         'items_wrap'      => '<ul id="%1$s" class="%2$s clearfix">%3$s</ul>',
-        'walker' => $walker
+        // 'walker' => $walker
     ) );
     ?>
 
-    <?php echo test_filter(); ?>
 
 

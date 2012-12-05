@@ -1,35 +1,22 @@
 <?php
+
 /**
- * Theme specific functionalities, split into separate files
+ * Base Theme: functions.php file
  *
- * @author Rafał Gicgier <gicolek@gmail.com>
+ * Loads Base Theme Class
+ * which analyzes config.php file contents
+ * - adding certain functionalities automatically
+ * - loading and setting base theme plugins
+ * - allowing faster development 
+ * - assuring consistency
  *
- * @todo extend widget class with some default entries
- * @todo extend settings api with some default entries
- * @todo introduce config / functions array to simplify theme settings
- *       - improve script loading via config array
+ * @package WordPress
+ * @subpackage Base Theme
+ * @author Rafal Gicgier rafal@x-team.com
  */
+require_once STYLESHEETPATH . '/base-config/base_theme_config.php';
 
-foreach ( glob( STYLESHEETPATH . '/includes/*.php' ) as $project_include ) {
-    require_once $project_include;
+// instantiate config values, based on the config files
+if ( class_exists( 'Base_Theme_Config' ) ) {
+	$config = new Base_Theme_Config();
 }
-
-require_once STYLESHEETPATH . '/skeleton/theme_config.php';
-
-if ( class_exists( 'Skeleton_Theme_Config' ) ) {
-  $config = new Skeleton_Theme_Config();
-}
-
-$pages = array(
-    'page1' => array(
-        'content' => '',
-    ),
-    'page2' => array(
-        'content' => '',
-    ),
-    'page3' => array(
-        'content' => '',
-    ),
-);
-
-// $config->generate_pages($pages, true);

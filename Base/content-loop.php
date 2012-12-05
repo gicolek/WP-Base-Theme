@@ -2,7 +2,7 @@
 /**
  * Base Theme: content-{template}
  *
- * Template file that displays content of a post.
+ * Template file that displays content from within a loop
  *
  * @package WordPress
  * @subpackage Base Theme

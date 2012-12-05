@@ -1,8 +1,13 @@
 <?php
 /**
- * Skeleton Theme: Search
- *
- * Adds some error info, uses WP built in functions etc.
+ * Base Theme: Search
+ * 
+ * Contains some dummy HTML with sample content
+ * http://codex.wordpress.org/Creating_an_Error_404_Page
+ * 
+ * @package WordPress
+ * @subpackage Base Theme
+ * @author Rafal Gicgier rafal@x-team.com
  */
 get_header(); ?>
 
@@ -12,9 +17,8 @@ get_header(); ?>
 
     <?php while ( have_posts() ) : the_post(); ?>
 
-        <?php /* TODO: post formats not yet implemented! */ ?>
 
-        <?php get_template_part( 'content', get_post_format() ); ?>
+        <?php get_template_part( 'content', 'loop' ); ?>
 
     <?php endwhile; // end of the loop.  ?>
 

@@ -1,12 +1,12 @@
 <?php
 /**
- * Skeleton Theme: Content
+ * Base Theme: content-{template}
  *
- * The template for displaying content after all other content-{template}
- * Contains some basic HTML and WordPress functions that are quite common across
- * all projects
+ * Template file that's used as general content file
  *
- * For the moment equal to content-single
+ * @package WordPress
+ * @subpackage Base Theme
+ * @author Rafal Gicgier rafal@x-team.com
  */
 ?>
 
@@ -14,12 +14,12 @@
 
     <a href="<?php echo get_permalink(); ?>"><?php the_title(); ?> </a>
 
-    <?php the_time( 'm/d/Y' ); ?>
-    <?php // http://codex.wordpress.org/Formatting_Date_and_Time ?>
+	<?php the_time( 'm/d/Y' ); ?>
+	<?php // http://codex.wordpress.org/Formatting_Date_and_Time ?>
 
-    <?php if ( has_post_thumbnail() ) the_post_thumbnail(); ?>
+	<?php if ( has_post_thumbnail() ) the_post_thumbnail(); ?>
 
-    <?php the_content(); ?>
+	<?php the_content(); ?>
 
 </div>
 <!-- / post -->

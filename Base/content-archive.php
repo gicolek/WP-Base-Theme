@@ -1,16 +1,26 @@
 <?php
 /**
- * Skeleton Theme: Archive content
+ * Base Theme: content-{template}
  *
- * Contains some basic links, permalinks and base HTML, that can be easily adjusted
+ * Template file that displays content of an archive
+ * 
+ * @package WordPress
+ * @subpackage Base Theme
+ * @author Rafal Gicgier rafal@x-team.com
  */
 ?>
-<a href="<?php echo get_permalink(); ?>" class="entry-title"><?php the_title(); ?> </a>
 
-<a href="<?php echo get_permalink(); ?>" class="entry-date"><?php the_time( 'm/d/Y' ); ?></a>
 
-<?php comments_popup_link( 'No Comments', '1 Comment', '% Comments', 'entry-utility' ); ?>
+<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
-<?php the_excerpt(); ?>
+    <a href="<?php echo get_permalink(); ?>"><?php the_title(); ?> </a>
 
-<a href="<?php echo get_permalink(); ?>" class="readmore">Read More</a>
+	<?php the_time( 'm/d/Y' ); ?>
+	<?php // http://codex.wordpress.org/Formatting_Date_and_Time ?>
+
+	<?php if ( has_post_thumbnail() ) the_post_thumbnail(); ?>
+
+	<?php the_content(); ?>
+
+</div>
+<!-- / post -->

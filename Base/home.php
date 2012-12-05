@@ -1,22 +1,30 @@
 <?php
 /**
- * Skeleton Theme: Home
+ * Base Theme: home.php
  *
- * Overwritten by Front Page
+ * @package WordPress
+ * @subpackage Base Theme
+ * @author Rafal Gicgier rafal@x-team.com
  */
-get_header(); ?>
+?>
+
+<?php /* print some info here */ ?>
 
 <?php if ( have_posts() ) : ?>
 
     <?php while ( have_posts() ) : the_post(); ?>
 
-       <?php get_template_part('content','single'); ?>
+        <?php get_template_part( 'content', 'loop' ); ?>
 
-    <?php endwhile; ?>
+    <?php endwhile;  ?>
 
 <?php else : ?>
 
+    <?php /* print empty info here */ ?>
+
 <?php endif; ?>
+
+<?php /* add pagination if needed here */ ?>
 
 <?php get_sidebar(); ?>
 <?php get_footer(); ?>

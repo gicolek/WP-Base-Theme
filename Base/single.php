@@ -1,8 +1,15 @@
 <?php
-/*
- * Skeleton Theme: Single post
+/**
+ * Base Theme: page.php
+ *
+ * Template file displaying a post
+ * 
+ * @package WordPress
+ * @subpackage Base Theme
+ * @author Rafal Gicgier rafal@x-team.com
  */
-get_header(); ?>
+get_header();
+?>
 
 <?php if ( have_posts() ): ?>
 

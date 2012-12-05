@@ -1,6 +1,10 @@
 <?php
 /**
- * Skeleton Theme: Archive page
+ * Base Theme: Archive
+ * 
+ * @package WordPress
+ * @subpackage Base Theme
+ * @author Rafal Gicgier rafal@x-team.com
  */
 get_header(); ?>
 

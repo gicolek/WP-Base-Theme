@@ -1,12 +1,12 @@
 <?php
 /**
- * Skeleton Theme: content-{template}
+ * Base Theme: content-{template}
  *
- * The template for displaying content after all other content-{template}
- * Contains some basic HTML and WordPress functions that are quite common across
- * all projects
- *
- * For the moment equal to content-single
+ * Template file that displays content of a page.
+ * 
+ * @package WordPress
+ * @subpackage Base Theme
+ * @author Rafal Gicgier rafal@x-team.com
  */
 ?>
 
