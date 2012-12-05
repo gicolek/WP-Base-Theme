@@ -1,52 +1,108 @@
-WP-Base-Theme
-=============
+# WP-Base-Theme Intro
 
-WP Base Theme used to simplify the development process.
+WP Base Theme is being written to simplify the creation of WordPress powered Themes,
+handling some functionality semi-automatically.
 
-This Base Theme, so called Skeleton, contains most commonly used 
-WordPress page templates and functionality, i.e.
+The main idea is to run everything from a single destination, provided a config array.
 
-Page Templates 
-==============
+> (actually this is Weston Ruter's idea, see https://github.com/westonruter)
+> but I incorporated it in my own way, having seen the same among different 
+> repos here and there :))
 
-404.php
-archive.php
-comments.php
-content-archive.php
-content-page.php
-content-single.php
-content.php
-footer.php
-front-page.php (for landing page)
-functions.php
-header.php
-home.php (for blog entries)
-index.php (not used most of the time)
-page.php
-screenshot.png
-search.php
-searchform.php
-sidebar.php
-single.php
-style.css
-todos.txt
+Moreover the theme contains most common files that are usually included
+in most themes.
 
-File functions.php is split into logical inclusions that reside inside the /includes file
-Each of these files contains most common / used functionalities that enable certain kind of WP feature
-For example scripts.php have functions responsible for scripts enqueueing.
+The main thing is the base-config directory in which there are two important files:
 
-The idea is to further extend the theme with some config values via configuration array.
-"skeleton" directory contains Skeleton_Theme_Config Class that is responsible for seting up the theme
-all config options can be provided via config.php file which returns the config array
+* base_theme_config.php
+* config.php
 
-Todos
-=====
+The former is a PHP class responsible for automatic handling of provided configuration
+The latter is the configuration array of config files, which has the following form:
 
-@todo1 add default widget class with default fields, that would be then extended, to simplify widget development, 
-for example text_widget with input[type="text"]
+```php
+<?php
 
-@todo2 extend settings api with default entries (similar to above)
+return array(
+	'key1' => array(
+	),
+	'key2' => array(
+	),
+	'key3' => array(
+	),
+	// etc.
+);
 
-@todo3 create default meta boxes to use from within the admin dashboard
+```
 
-@todo4 extend base class with other functionality (page generator / auto script enqueues) 
+# Using config.php file
+
+Currently there are automatic handlers for:
+
+* scripts
+* theme options
+* file inclusions (so that it'd be easy to find out what files were loaded and easily turn them of 
+to debug the code)
+
+## Scripts
+
+WordPress will auto load scripts based on the config array, starting with scripts key
+
+```php
+'scripts' => array(
+		'jquery-form' => array(
+			'handle' => 'jquery-form',
+			'enqueue' => true,
+		),
+	),
+```
+The above would include and enqueu jquery-form, giving it juery-form handle
+
+## Theme Options
+
+Base Theme supports semi-automatic of Appearance -> Theme Options page, for example
+
+```php
+'settings' => array(
+		'opt1' => array(
+			'type' => 'text',
+			'name' => 'input-text-1',
+			'desc' => 'Input type text test',
+		),
+		'opt2' => array(
+			'type' => 'text',
+			'name' => 'input-text-2',
+			'desc' => 'Input type text test 2',
+		),
+		'opt3' => array(
+			'type' => 'dropdown_pages',
+			'name' => 'dropdown-pages',
+			'desc' => 'Testing dropdown pages',
+		),
+		'opt4' => array(
+			'type' => 'wp_editor',
+			'name' => 'wp-editor',
+			'desc' => 'Testing WP Editor',
+		)
+	),
+```
+Would create 4 options:
+
+* 2 input text fields
+* 1 dropdown pages field
+* 1 wp editor field
+
+## File inclusions
+
+In case any extra files were supposed to be added, with some custom functionality
+this can be done via 
+
+```php
+'includes' => array(
+		'shortcodes' => true,
+	),
+```
+
+Base Theme would include the shortcodes.php file from the includes directory.
+
+Full, sample config file can be found within the base-config directory
