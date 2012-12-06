@@ -41,6 +41,7 @@ Currently there are automatic handlers for:
 
 * scripts
 * theme options
+* custom post types creation
 * file inclusions (so that it'd be easy to find out what files were loaded and easily turn them of 
 to debug the code)
 
@@ -91,6 +92,28 @@ Would create 4 options:
 * 2 input text fields
 * 1 dropdown pages field
 * 1 wp editor field
+
+## Custom Post Types Creation
+
+Base Theme can also handle auto posts creation, for example:
+
+```php
+'post_types' => array(
+		'post1' => array(
+			'name' => 'Slider',
+			'labels' => array(
+				'singular' => 'Slider',
+				'plural' => 'Slider entries',
+			),
+			'args' => array(
+				'supports' => array( 'title', 'editor', 'author', 'custom-fields', 'thumbnail', 'excerpt' ),
+			),
+		),
+	),
+```
+
+Would create a slider post type supporting title, editor, author, custom-fields and a thumbnail
+
 
 ## File inclusions
 
