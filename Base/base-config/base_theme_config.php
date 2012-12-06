@@ -140,10 +140,15 @@ class Base_Theme_Config {
 		// iterate through each script, register it and enqueu if needed
 		foreach ( $scripts as $script ) {
 			if ( self::is_assoc_array( $script ) ) {
-				
-				// WP included scripts won't be affected by wp_register_script
+
+				// unusual way of checking if the file exists provided a full url
+				if ( false === fopen( $scripts_dir . $script['file'], 'r' ) ) {
+					throw new Exception( "The {$script['file']} doesn't not exist, check the _ui/js directory!" );
+				}
+
+				// WP included scripts won't be affected by wp_register_script	
 				if ( isset( $script['handle'] ) ) {
-					wp_register_script( $script['handle'], $scripts_dir . $script['file'], isset( $script['deps'] ) ? $script['deps'] : array(), false, isset( $script['in_footer'] ) ? $script['in_footer'] : $in_footer  );
+					wp_register_script( $script['handle'], $scripts_dir . $script['file'], isset( $script['deps'] ) ? $script['deps'] : array( ), false, isset( $script['in_footer'] ) ? $script['in_footer'] : $in_footer  );
 				} else {
 					throw new Exception( 'Script handle undefined ' . $script . ' please check config.php.' );
 				}

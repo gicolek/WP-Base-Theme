@@ -47,17 +47,25 @@ to debug the code)
 
 ## Scripts
 
-WordPress will auto load scripts based on the config array, starting with scripts key
+WordPress will auto load scripts based on the config array, starting with scripts key.
+These should reside within _ui/js/ directory (Base Theme will throw an error in case
+the file didn't exist)
 
 ```php
 'scripts' => array(
-		'jquery-form' => array(
-			'handle' => 'jquery-form',
+		'main' => array(
+			'handle' => 'main',
+			'file' => 'main.js',
 			'enqueue' => true,
-		),
+			'deps' => array(
+				'jquery',
+			),
+ 		),
 	),
 ```
-The above would include and enqueu jquery-form, giving it juery-form handle
+The above would include and enqueue main.js, giving it main handle.
+Since no in_footer parameter was specified it would get loaded in the footer by default
+Why? http://stackoverflow.com/questions/5329807/benefits-of-loading-js-at-the-bottom-as-opposed-to-the-top-of-the-document
 
 ## Theme Options
 
