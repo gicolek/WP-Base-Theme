@@ -12,17 +12,11 @@
  */
 class Base_Settings {
 
-	private $options = array( );
+	private $settings = array( );
 
 	function __construct($args = array( )) {
 
-		$this->options = $args;
-
-		$args = array_merge(
-				array(
-			'config_file' => TEMPLATEPATH . DIRECTORY_SEPARATOR . 'base-config/config.php',
-				), $args
-		);
+		$this->settings = $args;
 
 		add_action( 'admin_init', array( $this, 'admin_init' ) );
 		add_action( 'admin_menu', array( $this, 'options_page' ) );
@@ -81,7 +75,7 @@ class Base_Settings {
 
 		add_settings_section( 'base_main', 'Main Settings', array( $this, 'options_text' ), 'base_settings' );
 
-		foreach ( $this->options as $option ) {
+		foreach ( $this->settings as $option ) {
 			add_settings_field( $option['name'], $option['desc'], array( $this, 'options_generate_fields' ), 'base_settings', 'base_main', $option );
 		}
 	}
@@ -173,7 +167,7 @@ class Base_Settings {
 	function options_validate($input) {
 		$valid = array( );
 
-		foreach ( $this->options as $option ) {
+		foreach ( $this->settings as $option ) {
 			if ( $option['type'] == 'text' )
 				$valid[$option['name']] = sanitize_text_field( $input[$option['name']] );
 			else if ( $option['type'] == 'dropdown_pages' ) {

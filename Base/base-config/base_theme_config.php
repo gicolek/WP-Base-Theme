@@ -53,6 +53,14 @@ class Base_Theme_Config {
 						$settings = new Base_Settings( $args );
 					}
 				}
+				// add post types
+				if ( array_key_exists( 'post_types', $config ) ) {
+					require_once STYLESHEETPATH . '/base-config/plugins/post_types.class';
+					$args = $config['post_types'];
+					if ( class_exists( 'Base_Post_Types' ) ) {
+						$posts = new Base_Post_Types( $args );
+					}
+				}
 
 				// load eny extra files, provided in the config from the includes directory 
 				if ( array_key_exists( 'includes', $config ) ) {

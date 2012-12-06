@@ -29,6 +29,18 @@ return array(
 			'desc' => 'Testing WP Editor',
 		)
 	),
+	'post_types' => array(
+		'post1' => array(
+			'name' => 'Slider',
+			'labels' => array(
+				'singular' => 'Slider',
+				'plural' => 'Slider entries',
+			),
+			'args' => array(
+				'supports' => array( 'title', 'editor', 'author', 'custom-fields', 'thumbnail', 'excerpt' ),
+			),
+		),
+	),
 	'includes' => array(
 		'shortcodes' => true,
 	),
