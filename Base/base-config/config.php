@@ -2,8 +2,12 @@
 
 return array(
 	'scripts' => array(
-		'jquery-form' => array(
-			'handle' => 'jquery-form',
+		'main' => array(
+			'handle' => 'main',
+			'file' => 'main.js',
+			'deps' => array(
+				'jquery',
+			),
 			'enqueue' => true,
 		),
 	),

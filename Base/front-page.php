@@ -9,6 +9,7 @@
  * @subpackage Base Theme
  * @author Rafal Gicgier rafal@x-team.com
  */
+get_header();
 ?>
 
 <?php /* print some info here */ ?>

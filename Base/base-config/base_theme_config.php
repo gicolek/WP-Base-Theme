@@ -43,9 +43,7 @@ class Base_Theme_Config {
 					add_action( 'wp_enqueue_scripts', array( $this, 'load_scripts' ) );
 				}
 
-				// add theme settings 
-				// if settings key exists, load settings class automatically
-				// and pass that array to Base_Settings constructor
+				// add theme settings (see Base_Settings class for details)
 				if ( array_key_exists( 'settings', $config ) ) {
 					require_once $include_path . '/base-config/plugins/settings.class';
 					$args = $config['settings'];
@@ -53,7 +51,7 @@ class Base_Theme_Config {
 						$settings = new Base_Settings( $args );
 					}
 				}
-				// add post types
+				// add post types (see Base_Post_Types class for details)
 				if ( array_key_exists( 'post_types', $config ) ) {
 					require_once STYLESHEETPATH . '/base-config/plugins/post_types.class';
 					$args = $config['post_types'];
@@ -113,7 +111,6 @@ class Base_Theme_Config {
 				'post_type' => 'page'
 			);
 
-			// @todo debug info echo 'adding ' . $key . ' content ' . $page['content'] . '<br />';
 			wp_insert_post( $my_post );
 		}
 	}
@@ -128,32 +125,27 @@ class Base_Theme_Config {
 	 * @param {array} $scripts 
 	 * 
 	 * @todo @param {bool} $autoload scripts
-	 * @todo check the code foreach
-	 * @todo add functionality to deregister automatical scripts
-	 * @todo change foreach to $handle => $script
-	 * @todo debug
+	 * @todo add functionality to deregister default scripts
 	 */
 	public function load_scripts() {
 
-		// load all config values in footer by default
+		// by default load all scripts values in the footer 
 		$in_footer = true;
 
-		$autoload = $this->config['scripts']['autoload'];
 		$scripts = $this->config['scripts'];
 
+		// contains trailing slash
+		$scripts_dir = get_template_directory_uri() . '/_ui/js/';
 
-		if ( $autoload ) {
-			$this->autoload_scripts();
-			return;
-		}
-
+		// iterate through each script, register it and enqueu if needed
 		foreach ( $scripts as $script ) {
-			if ( is_array( $script ) ) {
+			if ( self::is_assoc_array( $script ) ) {
+				
 				// WP included scripts won't be affected by wp_register_script
 				if ( isset( $script['handle'] ) ) {
-					wp_register_script( $script['handle'], get_template_directory_uri() . $script['path'], isset( $script['deps'] ) ? $script['deps'] : false, false, isset( $script['in_footer'] ) ? $script['in_footer'] : $in_footer  );
-				} else if ( !isset( $script['default'] ) ) {
-					throw new Exception( '$script handle or path undefined ' . $script . ' please check config.php.' );
+					wp_register_script( $script['handle'], $scripts_dir . $script['file'], isset( $script['deps'] ) ? $script['deps'] : array(), false, isset( $script['in_footer'] ) ? $script['in_footer'] : $in_footer  );
+				} else {
+					throw new Exception( 'Script handle undefined ' . $script . ' please check config.php.' );
 				}
 				if ( $script['enqueue'] ) {
 					wp_enqueue_script( $script['handle'] );
