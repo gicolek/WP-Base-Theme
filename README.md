@@ -5,7 +5,8 @@
 * [Scripts] (https://github.com/gicolek/WP-Base-Theme#scripts)
 * [Theme Options] (https://github.com/gicolek/WP-Base-Theme#theme-options)
 * [Custom Post Types Creation] (https://github.com/gicolek/WP-Base-Theme#custom-post-types-creation)
-# [File	inclusions] (https://github.com/gicolek/WP-Base-Theme#file-inclusions)
+* [File	inclusions] (https://github.com/gicolek/WP-Base-Theme#file-inclusions)
+* [Todos List / Enhancements] (https://github.com/gicolek/WP-Base-Theme#todos-list--enhancements)
 
 # WP Base Theme Description
 
@@ -150,9 +151,9 @@ Base Theme would include the shortcodes.php file from the includes directory.
 
 Full, sample config file can be found within the base-config directory.
 
-# Todos List / Enchancements
+# Todos List / Enhancements
 
-* Add callback functions to the Theme Settings class, allowing custom classes
+* Add callback functions to the Theme Settings class, allowing custom callback functions 
 * Extend WP_Widget class with to facilitate creation of Widgets
 * Add some generic screenshot
 * Add support for more features
