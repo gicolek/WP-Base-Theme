@@ -1,7 +1,17 @@
-# WP-Base-Theme Intro
+# Table of Contents
+
+* [WP Base Theme Description] (https://github.com/gicolek/WP-Base-Theme#wp-base-theme-description)
+* [Using config.php file] (https://github.com/gicolek/WP-Base-Theme#using-configphp-file)
+* [Scripts] (https://github.com/gicolek/WP-Base-Theme#scripts)
+* [Theme Options] (https://github.com/gicolek/WP-Base-Theme#theme-options)
+* [Custom Post Types Creation] (https://github.com/gicolek/WP-Base-Theme#custom-post-types-creation)
+# [File	inclusions] (https://github.com/gicolek/WP-Base-Theme#file-inclusions)
 
 WP Base Theme is being written to simplify the creation of WordPress powered Themes,
 handling some functionality semi-automatically.
+
+Unlike other themes WP Base Theme doesn't include any kind of HTML or CSS. This is solely
+a PHP project. I wanted to provide a good bese, reducing the amount of markup removal.
 
 The main idea is to run everything from a single destination, provided a config array.
 
@@ -10,7 +20,7 @@ The main idea is to run everything from a single destination, provided a config 
 > repos here and there :))
 
 Moreover the theme contains most common files that are usually included
-in most themes.
+in most projects involving WP.
 
 The main thing is the base-config directory in which there are two important files:
 
@@ -136,4 +146,14 @@ this can be done via
 
 Base Theme would include the shortcodes.php file from the includes directory.
 
-Full, sample config file can be found within the base-config directory
+Full, sample config file can be found within the base-config directory.
+
+# Todos List / Enchancements
+
+* Add callback functions to the Theme Settings class, allowing custom classes
+* Extend WP_Widget class with to facilitate creation of Widgets
+* Add some generic screenshot
+* Add support for more features
+- auto sidebar creation
+- auto nav menu creation
+
