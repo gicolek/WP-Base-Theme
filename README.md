@@ -7,6 +7,8 @@
 * [Custom Post Types Creation] (https://github.com/gicolek/WP-Base-Theme#custom-post-types-creation)
 # [File	inclusions] (https://github.com/gicolek/WP-Base-Theme#file-inclusions)
 
+# WP Base Theme Description
+
 WP Base Theme is being written to simplify the creation of WordPress powered Themes,
 handling some functionality semi-automatically.
 
