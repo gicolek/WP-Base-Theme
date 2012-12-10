@@ -150,7 +150,9 @@ Provided config values of the following form:
 		),
 	),
 ```
-Two sidebars will be created, one sidebar-1 with default values, that is:
+Two sidebars will be created:
+
+- sidebar-1 with default values, that is:
 
 ```php
 		'name' => __( 'Sidebar', 'wpized_light' ),
@@ -161,14 +163,21 @@ Two sidebars will be created, one sidebar-1 with default values, that is:
 		'after_title' => '</h3>',
 ```
 
-And sidebar-2 with custom name and id arguments.
+- sidebar-2 with custom name and id arguments.
 
 This approach provides some flexibility and allows simple sidebar creation, without
 the need of code repetition.
 
-
-
 ## Navigation Menus Registration
+
+Example:
+
+```php
+'nav-menus' => array(
+		'navigation-top' => __( 'Top Navigation Menu' ),
+		'navigation-foot' => __( 'Footer Navigation Menu' ),
+	)
+```
 
 In the same way as above navigation menus can be created. WP Base Theme is making 
 usage of WP built in register_nav_menus() method. It's just here to provide functionality
