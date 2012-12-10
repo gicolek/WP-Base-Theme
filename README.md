@@ -55,6 +55,8 @@ Currently there are automatic handlers for:
 * scripts
 * theme options
 * custom post types creation
+* auto sidebar registration
+* navigation menus registration
 * file inclusions (so that it'd be easy to find out what files were loaded and easily turn them of 
 to debug the code)
 
@@ -135,6 +137,42 @@ Base Theme can also handle auto posts creation, for example:
 
 Would create a slider post type supporting title, editor, author, custom-fields and a thumbnail
 
+## Auto Sidebar Registration
+
+Provided config values of the following form:
+
+```php
+'sidebars' => array(
+		'sidebar-1' => array( ),
+		'sidebar-2' => array(
+			'name' =>  __( "Sidebar Rafal", WP_BASE_DOMAIN ),
+			'id' => "sidebar-rafal",
+		),
+	),
+```
+Two sidebars will be created, one sidebar-1 with default values, that is:
+
+```php
+		'name' => __( 'Sidebar', 'wpized_light' ),
+		'id' => 'sidebar-1',
+		'before_widget' => '<section id="%1$s"class="sidebar-widget-menu %2$s">',
+		'after_widget' => "</section>",
+		'before_title' => '<h3>',
+		'after_title' => '</h3>',
+```
+
+And sidebar-2 with custom name and id arguments.
+
+This approach provides some flexibility and allows simple sidebar creation, without
+the need of code repetition.
+
+
+
+## Navigation Menus Registration
+
+In the same way as above navigation menus can be created. WP Base Theme is making 
+usage of WP built in register_nav_menus() method. It's just here to provide functionality
+from one place
 
 ## File inclusions
 
