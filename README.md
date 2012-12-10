@@ -5,6 +5,8 @@
 * [Scripts] (https://github.com/gicolek/WP-Base-Theme#scripts)
 * [Theme Options] (https://github.com/gicolek/WP-Base-Theme#theme-options)
 * [Custom Post Types Creation] (https://github.com/gicolek/WP-Base-Theme#custom-post-types-creation)
+* [Auto Sidebar Registration] (https://github.com/gicolek/WP-Base-Theme#auto-sidebar-registration)
+* [Navigation Menus Registration] (https://github.com/gicolek/WP-Base-Theme#navigation-menus-registration)
 * [File	inclusions] (https://github.com/gicolek/WP-Base-Theme#file-inclusions)
 * [Todos List / Enhancements] (https://github.com/gicolek/WP-Base-Theme#todos-list--enhancements)
 
@@ -204,6 +206,3 @@ Full, sample config file can be found within the base-config directory.
 * Extend WP_Widget class with to facilitate creation of Widgets
 * Add some generic screenshot
 * Add support for more features
-- auto sidebar creation
-- auto nav menu creation
-
