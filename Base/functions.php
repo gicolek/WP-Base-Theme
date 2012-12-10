@@ -14,6 +14,8 @@
  * @subpackage Base Theme
  * @author Rafal Gicgier rafal@x-team.com
  */
+define( 'WP_BASE_DOMAIN', 'wp_base_domain' );
+
 require_once STYLESHEETPATH . '/base-config/base_theme_config.php';
 
 // instantiate config values, based on the config files

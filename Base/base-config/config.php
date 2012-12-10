@@ -48,4 +48,11 @@ return array(
 	'includes' => array(
 		'shortcodes' => true,
 	),
+	'sidebars' => array(
+		'sidebar-1' => array( ),
+	),
+	'nav-menus' => array(
+		'navigation-top' => __( 'Top Navigation Menu' ),
+		'navigation-foot' => __( 'Footer Navigation Menu' ),
+	)
 );

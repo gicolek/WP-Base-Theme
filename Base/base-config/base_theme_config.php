@@ -51,6 +51,7 @@ class Base_Theme_Config {
 						$settings = new Base_Settings( $args );
 					}
 				}
+
 				// add post types (see Base_Post_Types class for details)
 				if ( array_key_exists( 'post_types', $config ) ) {
 					require_once STYLESHEETPATH . '/base-config/plugins/post_types.class';
@@ -68,6 +69,28 @@ class Base_Theme_Config {
 						}
 					}
 				}
+
+				// register sidebars with default callback values
+				if ( array_key_exists( 'sidebars', $config ) ) {
+					$count_sidebars = 0;
+					foreach ( $config['sidebars'] as $key => $sidebar ) {
+						++$count_sidebars;
+						register_sidebar( array(
+							'name' => isset( $sidebar['name'] ) ? $sidebar['name'] : __( "Sidebar-{$count_sidebars}", WP_BASE_DOMAIN ),
+							'id' => isset( $sidebar['id'] ) ? $sidebar['id'] : "sidebar-{$count_sidebars}",
+							'before_widget' => isset( $sidebar['before_widget'] ) ? $sidebar['before_widget'] : '<section id="%1$s"class="sidebar-widget-menu %2$s">',
+							'after_widget' => isset( $sidebar['after_widget'] ) ? $sidebar['before_widget'] : '</section>issert(',
+							'before_title' => isset( $sidebar['before_title'] ) ? $sidebar['before_title'] : '</h3>',
+							'after_title' => isset( $sidebar['after_title'] ) ? $sidebar['after_title'] : '</h3>',
+						) );
+					}
+				}
+
+				// register nav menus
+				if ( array_key_exists( 'nav-menus', $config ) ) {
+					register_nav_menus( $config['nav-menus'] );
+				}
+				
 				//@todo run debug (force files to be included from includes)
 			} else {
 				throw new Exception( 'No config values found or config is not an associative array' );
