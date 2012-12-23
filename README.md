@@ -8,6 +8,7 @@
 * [Auto Sidebar Registration] (https://github.com/gicolek/WP-Base-Theme#auto-sidebar-registration)
 * [Navigation Menus Registration] (https://github.com/gicolek/WP-Base-Theme#navigation-menus-registration)
 * [File	inclusions] (https://github.com/gicolek/WP-Base-Theme#file-inclusions)
+* [Licnese] (https://github.com/gicolek/WP-Base-Theme/blob/master/README.md#license)
 * [Todos List / Enhancements] (https://github.com/gicolek/WP-Base-Theme#todos-list--enhancements)
 
 # WP Base Theme Description
