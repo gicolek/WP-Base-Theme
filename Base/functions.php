@@ -16,7 +16,7 @@
  */
 define( 'WP_BASE_DOMAIN', 'wp_base_domain' );
 
-require_once STYLESHEETPATH . '/base-config/base_theme_config.php';
+require_once trailingslashit( get_template_directory() ) . '/base-config/base_theme_config.php';
 
 // instantiate config values, based on the config files
 if ( class_exists( 'Base_Theme_Config' ) ) {

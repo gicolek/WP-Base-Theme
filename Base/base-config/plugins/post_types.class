@@ -14,7 +14,7 @@ class Base_Post_Types {
 	function __construct($args = array( )) {
 
 		$this->posts = $args;
-		
+
 		add_action( 'init', array( $this, 'posts_init' ) );
 	}
 
@@ -26,17 +26,17 @@ class Base_Post_Types {
 		foreach ( $this->posts as $post ) {
 			if ( !$post['labels'] ) {
 				$labels = array(
-					'name' => _x( 'Slider', 'post type general name' ),
-					'singular_name' => _x( 'Slider', 'post type singular name' ),
-					'all_items' => __( 'All slider entries' ),
-					'add_new' => _x( 'Add new slider entry', 'slider' ),
-					'add_new_item' => __( 'Add new slider' ),
-					'edit_item' => __( 'Edit slider entry' ),
-					'new_item' => __( 'New Slider entry' ),
-					'view_item' => __( 'View Slider' ),
-					'search_items' => __( 'Search in slider' ),
-					'not_found' => __( 'No slider found' ),
-					'not_found_in_trash' => __( 'No slider found in trash' ),
+					'name' => _x( 'Slider', 'post type general name', WP_BASE_DOMAIN ),
+					'singular_name' => _x( 'Slider', 'post type singular name', WP_BASE_DOMAIN ),
+					'all_items' => __( 'All slider entries', WP_BASE_DOMAIN ),
+					'add_new' => _x( 'Add new slider entry', 'slider', WP_BASE_DOMAIN ),
+					'add_new_item' => __( 'Add new slider', WP_BASE_DOMAIN ),
+					'edit_item' => __( 'Edit slider entry', WP_BASE_DOMAIN ),
+					'new_item' => __( 'New Slider entry', WP_BASE_DOMAIN ),
+					'view_item' => __( 'View Slider', WP_BASE_DOMAIN ),
+					'search_items' => __( 'Search in slider', WP_BASE_DOMAIN ),
+					'not_found' => __( 'No slider found', WP_BASE_DOMAIN ),
+					'not_found_in_trash' => __( 'No slider found in trash', WP_BASE_DOMAIN ),
 					'parent_item_colon' => '',
 				);
 			} else {
@@ -83,7 +83,7 @@ class Base_Post_Types {
 					'supports' => $post['args']['supports'],
 					'has_archive' => $post['name'],
 				);
-				register_post_type( 'Base_'.$post['name'], $args );
+				register_post_type( 'Base_' . $post['name'], $args );
 			}
 		}
 	}

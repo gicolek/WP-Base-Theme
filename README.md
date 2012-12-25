@@ -1,5 +1,6 @@
 # Table of Contents
 
+* [License] (https://github.com/gicolek/WP-Base-Theme#license)
 * [WP Base Theme Description] (https://github.com/gicolek/WP-Base-Theme#wp-base-theme-description)
 * [Using config.php file] (https://github.com/gicolek/WP-Base-Theme#using-configphp-file)
 * [Scripts] (https://github.com/gicolek/WP-Base-Theme#scripts)
@@ -8,8 +9,25 @@
 * [Auto Sidebar Registration] (https://github.com/gicolek/WP-Base-Theme#auto-sidebar-registration)
 * [Navigation Menus Registration] (https://github.com/gicolek/WP-Base-Theme#navigation-menus-registration)
 * [File	inclusions] (https://github.com/gicolek/WP-Base-Theme#file-inclusions)
-* [Licnese] (https://github.com/gicolek/WP-Base-Theme/blob/master/README.md#license)
+* [Shortcodes] (https://github.com/gicolek/WP-Base-Theme#shortcodes)
 * [Todos List / Enhancements] (https://github.com/gicolek/WP-Base-Theme#todos-list--enhancements)
+
+# License
+
+WP Base Theme is licensed under the GPL v2 or later.
+
+> This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License, version 2, as 
+published by the Free Software Foundation.
+
+> This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+> You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 # WP Base Theme Description
 
@@ -66,7 +84,7 @@ to debug the code)
 ## Scripts
 
 WordPress will auto load scripts based on the config array, starting with scripts key.
-These should reside within _ui/js/ directory (Base Theme will throw an error in case
+**These should reside within _ui/js/ directory** (Base Theme will throw an error in case
 the file didn't exist)
 
 ```php
@@ -82,6 +100,7 @@ the file didn't exist)
 	),
 ```
 The above would include and enqueue main.js, giving it main handle.
+
 Since no in_footer parameter was specified it would get loaded in the footer by default
 Why? http://stackoverflow.com/questions/5329807/benefits-of-loading-js-at-the-bottom-as-opposed-to-the-top-of-the-document
 
@@ -118,6 +137,37 @@ Would create 4 options:
 * 2 input text fields
 * 1 dropdown pages field
 * 1 wp editor field
+
+In case custom Theme Options were to be added Base Theme Supports custom callback functionality, for example:
+
+```php
+'settings' => array(
+		'custom' => array(
+			'generate_field_callback' => 'custom_generate_field',
+			'validate_field_callback' => 'custom_validate_field',
+			'name' => 'custom',
+			'desc' => 'Custom Field with callback functions',
+		),
+),
+```
+Where custom callback functions could be of the following form:
+
+```php 
+function custom_generate_field() {
+	$options = get_option( 'base_options' );
+	if ( !empty( $options['custom'] ) ) {
+		echo "<input id='custom' name='base_options[custom]' size='80' type='text' value='{$options['custom']}' />";
+	}
+	else
+		echo "<input id='custom' name='base_options[custom]' size='80' type='text' value='' />";
+}
+
+function custom_validate_field($input) {
+	$valid = $input['custom'];
+	return $valid;
+}
+```
+They could be placed in an included file or at the bottom of the config.php.
 
 ## Custom Post Types Creation
 
@@ -197,30 +247,22 @@ this can be done via
 	),
 ```
 
-Base Theme would include the shortcodes.php file from the includes directory.
+Base Theme would include the shortcodes.php file from the **includes** directory.
 
-Full, sample config file can be found within the base-config directory.
+## Shortcodes
 
-# License
+For sake of popularity of shortcodes I've added sample shortcodes.php
+file to the /includes directory, which gets loaded by default. 
 
-The WordPress Plugin Boilerplate is licensed under the GPL v2 or later.
+See its contents to find the working examples.
 
-> This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License, version 2, as 
-published by the Free Software Foundation.
-
-> This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-> You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+*__Full, sample config file can be found within the base-config directory.__*
 
 # Todos List / Enhancements
 
-* Add callback functions to the Theme Settings class, allowing custom callback functions 
-* Extend WP_Widget class with to facilitate creation of Widgets
-* Add some generic screenshot
-* Add support for more features
+* Add more features:
+
+* Extend Settings class with more default functions
+* Extend WP_Widget class to provide functionality similar to the Settings class
+* Test, debug etc.
+

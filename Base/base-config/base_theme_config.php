@@ -21,80 +21,76 @@ class Base_Theme_Config {
 	 */
 	function __construct($args = array( )) {
 
-		$include_path = TEMPLATEPATH . DIRECTORY_SEPARATOR;
+		$include_path = trailingslashit( get_template_directory() );
 
-		$args = array_merge(
-				array(
-			'config_file' => TEMPLATEPATH . DIRECTORY_SEPARATOR . 'base-config/config.php',
-				), $args
-		);
-		extract( $args );
+		$config_file = $include_path . 'base-config/config.php';
 
-		if ( is_array( $args ) ) {
-			if ( array_key_exists( 'config_file', $args ) ) {
-				$config = require($config_file);
+		$config = require($config_file);
+
+		// check if it's assoc array
+		if ( self::is_assoc_array( $config ) && !empty( $config_file ) ) {
+
+			// enqueue scripts
+			if ( array_key_exists( 'scripts', $config ) ) {
+				$this->config['scripts'] = $config['scripts'];
+				add_action( 'wp_enqueue_scripts', array( $this, 'load_scripts' ) );
 			}
-			// check if it's assoc array
-			if ( self::is_assoc_array( $config ) ) {
 
-				// enqueue scripts
-				if ( array_key_exists( 'scripts', $config ) ) {
-					$this->config['scripts'] = $config['scripts'];
-					add_action( 'wp_enqueue_scripts', array( $this, 'load_scripts' ) );
+			// add theme settings (see Base_Settings class for details)
+			if ( array_key_exists( 'settings', $config ) ) {
+				require_once $include_path . '/base-config/plugins/settings.class';
+				$args = $config['settings'];
+				if ( class_exists( 'Base_Settings' ) ) {
+					$settings = new Base_Settings( $args );
 				}
-
-				// add theme settings (see Base_Settings class for details)
-				if ( array_key_exists( 'settings', $config ) ) {
-					require_once $include_path . '/base-config/plugins/settings.class';
-					$args = $config['settings'];
-					if ( class_exists( 'Base_Settings' ) ) {
-						$settings = new Base_Settings( $args );
-					}
-				}
-
-				// add post types (see Base_Post_Types class for details)
-				if ( array_key_exists( 'post_types', $config ) ) {
-					require_once STYLESHEETPATH . '/base-config/plugins/post_types.class';
-					$args = $config['post_types'];
-					if ( class_exists( 'Base_Post_Types' ) ) {
-						$posts = new Base_Post_Types( $args );
-					}
-				}
-
-				// load eny extra files, provided in the config from the includes directory 
-				if ( array_key_exists( 'includes', $config ) ) {
-					foreach ( $config['includes'] as $key => $value ) {
-						if ( true === $value ) {
-							include_once $include_path . 'includes/' . $key . '.php';
-						}
-					}
-				}
-
-				// register sidebars with default callback values
-				if ( array_key_exists( 'sidebars', $config ) ) {
-					$count_sidebars = 0;
-					foreach ( $config['sidebars'] as $key => $sidebar ) {
-						++$count_sidebars;
-						register_sidebar( array(
-							'name' => isset( $sidebar['name'] ) ? $sidebar['name'] : __( "Sidebar-{$count_sidebars}", WP_BASE_DOMAIN ),
-							'id' => isset( $sidebar['id'] ) ? $sidebar['id'] : "sidebar-{$count_sidebars}",
-							'before_widget' => isset( $sidebar['before_widget'] ) ? $sidebar['before_widget'] : '<section id="%1$s"class="sidebar-widget-menu %2$s">',
-							'after_widget' => isset( $sidebar['after_widget'] ) ? $sidebar['before_widget'] : '</section>issert(',
-							'before_title' => isset( $sidebar['before_title'] ) ? $sidebar['before_title'] : '</h3>',
-							'after_title' => isset( $sidebar['after_title'] ) ? $sidebar['after_title'] : '</h3>',
-						) );
-					}
-				}
-
-				// register nav menus
-				if ( array_key_exists( 'nav-menus', $config ) ) {
-					register_nav_menus( $config['nav-menus'] );
-				}
-				
-				//@todo run debug (force files to be included from includes)
-			} else {
-				throw new Exception( 'No config values found or config is not an associative array' );
 			}
+
+			// add post types (see Base_Post_Types class for details)
+			if ( array_key_exists( 'post_types', $config ) ) {
+				require_once STYLESHEETPATH . '/base-config/plugins/post_types.class';
+				$args = $config['post_types'];
+				if ( class_exists( 'Base_Post_Types' ) ) {
+					$posts = new Base_Post_Types( $args );
+				}
+			}
+
+			// load eny extra files, provided in the config from the includes directory 
+			if ( array_key_exists( 'includes', $config ) ) {
+				foreach ( $config['includes'] as $key => $value ) {
+					if ( true === $value ) {
+						include_once $include_path . 'includes/' . $key . '.php';
+					}
+				}
+			}
+
+			// register sidebars with default callback values
+			if ( array_key_exists( 'sidebars', $config ) ) {
+				$count_sidebars = 0;
+				foreach ( $config['sidebars'] as $key => $sidebar ) {
+					++$count_sidebars;
+
+					if ( $key == 'base' )
+						continue;
+
+					register_sidebar( array(
+						'name' => isset( $sidebar['name'] ) ? $sidebar['name'] : __( "Sidebar-{$count_sidebars}", WP_BASE_DOMAIN ),
+						'id' => isset( $sidebar['id'] ) ? $sidebar['id'] : "sidebar-{$count_sidebars}",
+						'before_widget' => isset( $sidebar['before_widget'] ) ? $sidebar['before_widget'] : '<section id="%1$s"class="sidebar-widget-menu %2$s">',
+						'after_widget' => isset( $sidebar['after_widget'] ) ? $sidebar['before_widget'] : '</section>',
+						'before_title' => isset( $sidebar['before_title'] ) ? $sidebar['before_title'] : '</h3>',
+						'after_title' => isset( $sidebar['after_title'] ) ? $sidebar['after_title'] : '</h3>',
+					) );
+				}
+			}
+
+			// register nav menus
+			if ( array_key_exists( 'nav-menus', $config ) ) {
+				register_nav_menus( $config['nav-menus'] );
+			}
+
+			//@todo run debug (force files to be included from includes)
+		} else {
+			throw new Exception( 'No config values found or config is not an associative array' );
 		}
 	}
 

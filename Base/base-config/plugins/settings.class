@@ -1,10 +1,11 @@
 <?php
+
 /**
  * Base Theme Settings Class, which facilitates
  * creation of Theme Options Page doing so semi-automatically
  * given a config array
  * 
- * sample - see functions.php
+ * sample - see config.php
  *  
  * @package WordPress
  * @subpackage Base Theme
@@ -76,6 +77,10 @@ class Base_Settings {
 		add_settings_section( 'base_main', 'Main Settings', array( $this, 'options_text' ), 'base_settings' );
 
 		foreach ( $this->settings as $option ) {
+			if ( isset( $option['generate_field_callback'] ) && isset( $option['validate_field_callback'] ) ) {
+				add_settings_field( $option['name'], $option['desc'], $option['generate_field_callback'], 'base_settings', 'base_main', $option );
+				continue;
+			}
 			add_settings_field( $option['name'], $option['desc'], array( $this, 'options_generate_fields' ), 'base_settings', 'base_main', $option );
 		}
 	}
@@ -101,7 +106,7 @@ class Base_Settings {
 		} else if ( $option['type'] == 'wp_editor' ) {
 			$this->generate_wp_editor( $option );
 		} else {
-			// @todo throw an error?
+			// check if callback is defined
 		}
 	}
 
@@ -168,6 +173,10 @@ class Base_Settings {
 		$valid = array( );
 
 		foreach ( $this->settings as $option ) {
+			if ( isset( $option['validate_field_callback'] ) ) {
+				$valid[$option['name']] = call_user_func( $option['validate_field_callback'], $input );
+				continue;
+			}
 			if ( $option['type'] == 'text' )
 				$valid[$option['name']] = sanitize_text_field( $input[$option['name']] );
 			else if ( $option['type'] == 'dropdown_pages' ) {
@@ -175,6 +184,7 @@ class Base_Settings {
 			} else if ( $option['type'] == 'wp_editor' ) {
 				$valid[$option['name']] = $input[$option['name']];
 			}
+
 			// @todo if
 		}
 		// add_settings_error( 'secreta_about', 'settings_updated', 'error fucker' );
