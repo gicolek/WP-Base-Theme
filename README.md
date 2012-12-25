@@ -71,6 +71,8 @@ return array(
 
 # Using config.php file
 
+*__Full, sample config file can be found within the base-config directory.__*
+
 Currently there are automatic handlers for:
 
 * scripts
@@ -255,8 +257,6 @@ For sake of popularity of shortcodes I've added sample shortcodes.php
 file to the /includes directory, which gets loaded by default. 
 
 See its contents to find the working examples.
-
-*__Full, sample config file can be found within the base-config directory.__*
 
 # Todos List / Enhancements
 
