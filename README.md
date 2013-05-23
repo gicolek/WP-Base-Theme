@@ -6,6 +6,7 @@
 * [Scripts] (https://github.com/gicolek/WP-Base-Theme#scripts)
 * [Theme Options] (https://github.com/gicolek/WP-Base-Theme#theme-options)
 * [Custom Post Types Creation] (https://github.com/gicolek/WP-Base-Theme#custom-post-types-creation)
+* [Custom Taxonomies Creation] (https://github.com/gicolek/WP-Base-Theme#custom-taxonomies-creation)
 * [Auto Sidebar Registration] (https://github.com/gicolek/WP-Base-Theme#auto-sidebar-registration)
 * [Navigation Menus Registration] (https://github.com/gicolek/WP-Base-Theme#navigation-menus-registration)
 * [File	inclusions] (https://github.com/gicolek/WP-Base-Theme#file-inclusions)
@@ -175,8 +176,7 @@ Base Theme can also handle auto posts creation, for example:
 
 ```php
 'post_types' => array(
-		'post1' => array(
-			'name' => 'Slider',
+		'base_slider' => array(
 			'labels' => array(
 				'singular' => 'Slider',
 				'plural' => 'Slider entries',
@@ -189,6 +189,38 @@ Base Theme can also handle auto posts creation, for example:
 ```
 
 Would create a slider post type supporting title, editor, author, custom-fields and a thumbnail
+
+Note: This shortcut makes usage of http://codex.wordpress.org/Function_Reference/register_post_type
+
+Note: it is wise to always prefix CPT with some word, like base above
+
+## Custom Taxonomies Creation
+
+Base Theme facilitates creation of custom taxonomies
+
+```php
+ 'tax' => array(
+		// taxonomy like category
+		'wp-base-tax' => array(
+			'singular' => 'WP Base Tax',
+			'plural' => 'WP Base Taxes',
+			'rewrite' => array( 'slug' => 'wp-base-tax', 'with_front' => false ),
+			'posts' => array( 'slider' ), 
+		),
+		// taxonomy like tag
+		'wp-base-tag' => array(
+			'singular' => 'WP Base Tag',
+			'plural' => 'WP Base Tags',
+			'rewrite' => array( 'slug' => 'wp-base-tag', 'with_front' => false ),
+			'posts' => array( 'base_slider' ),
+			'hierarchical' => false,
+		),
+	),
+```
+Would create two new taxonomies: one hierarhical like category and the other one non hierarchical
+like tag, both of these would be assigned to the base_slider post type:
+
+Note: This shortcut makes usage of: http://codex.wordpress.org/Function_Reference/register_taxonomy
 
 ## Auto Sidebar Registration
 

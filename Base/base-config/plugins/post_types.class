@@ -23,7 +23,7 @@ class Base_Post_Types {
 	 * If no arguments are specified there would be a default post Slider added. 
 	 */
 	function posts_init() {
-		foreach ( $this->posts as $post ) {
+		foreach ( $this->posts as $key => $post ) {
 			if ( !$post['labels'] ) {
 				$labels = array(
 					'name' => _x( 'Slider', 'post type general name', WP_BASE_DOMAIN ),
@@ -81,9 +81,9 @@ class Base_Post_Types {
 					'hierarchical' => false,
 					'menu_position' => 5,
 					'supports' => $post['args']['supports'],
-					'has_archive' => $post['name'],
+					'has_archive' => $key ,
 				);
-				register_post_type( 'Base_' . $post['name'], $args );
+				register_post_type( $key , $args );
 			}
 		}
 	}

@@ -53,6 +53,15 @@ class Base_Theme_Config {
 					$posts = new Base_Post_Types( $args );
 				}
 			}
+			
+			// add post types (see Base_Post_Types class for details)
+			if ( array_key_exists( 'tax', $config ) ) {
+				require_once STYLESHEETPATH . '/base-config/plugins/tax.class';
+				$args = $config['tax'];
+				if ( class_exists( 'Base_Tax' ) ) {
+					$posts = new Base_Tax( $args );
+				}
+			}
 
 			// load eny extra files, provided in the config from the includes directory 
 			if ( array_key_exists( 'includes', $config ) ) {

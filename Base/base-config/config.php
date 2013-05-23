@@ -40,8 +40,7 @@ return array(
 		),
 	),
 	'post_types' => array(
-		'post1' => array(
-			'name' => 'Slider',
+		'slider' => array(
 			'labels' => array(
 				'singular' => 'Slider',
 				'plural' => 'Slider entries',
@@ -49,6 +48,23 @@ return array(
 			'args' => array(
 				'supports' => array( 'title', 'editor', 'author', 'custom-fields', 'thumbnail', 'excerpt' ),
 			),
+		),
+	),
+	'tax' => array(
+		// taxonomy like category
+		'wp-base-tax' => array(
+			'singular' => 'WP Base Tax',
+			'plural' => 'WP Base Taxes',
+			'rewrite' => array( 'slug' => 'wp-base-tax', 'with_front' => false ),
+			'posts' => array( 'slider' ), 
+		),
+		// taxonomy like tag
+		'wp-base-tag' => array(
+			'singular' => 'WP Base Tag',
+			'plural' => 'WP Base Tags',
+			'rewrite' => array( 'slug' => 'wp-base-tag', 'with_front' => false ),
+			'posts' => array( 'slider' ),
+			'hierarchical' => false,
 		),
 	),
 	'includes' => array(
