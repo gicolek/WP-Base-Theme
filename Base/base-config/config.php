@@ -110,10 +110,10 @@ return array(
 				"post_status" => "publish",
 				"post_excerpt" => "Lorem ipsum dolor sit amet",
 				"slug" => "bt-pt",
-				'terms' => array(
-					"category" => array( 'Uncategorized', 'Lorem' ),
-					"post_tag" => "tag1, tag2, tag3",
-				),
+				//'terms' => array(
+					//"category" => array( 'Uncategorized', 'Lorem' ),
+					//"post_tag" => "tag1, tag2, tag3",
+				//),
 				"post_status" => 'publish',
 				'page_template' => 'page-template.tpl.php'
 			),
