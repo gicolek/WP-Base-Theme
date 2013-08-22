@@ -53,7 +53,7 @@ class Base_Theme_Config {
 					$posts = new Base_Post_Types( $args );
 				}
 			}
-			
+
 			// add post types (see Base_Post_Types class for details)
 			if ( array_key_exists( 'tax', $config ) ) {
 				require_once STYLESHEETPATH . '/base-config/plugins/tax.class';
@@ -96,6 +96,25 @@ class Base_Theme_Config {
 			if ( array_key_exists( 'nav-menus', $config ) ) {
 				register_nav_menus( $config['nav-menus'] );
 			}
+
+			// add posts
+			if ( array_key_exists( 'posts', $config ) ) {
+				require_once STYLESHEETPATH . '/base-config/plugins/content.class.php';
+				$args = $config['posts'];
+				if ( class_exists( 'Base_Content' ) ) {
+					$posts = new Base_Content( $args );
+				}
+			}
+
+			/*
+			if ( array_key_exists( 'menus', $config ) ) {
+				require_once STYLESHEETPATH . '/base-config/plugins/content.class.php';
+				$args = $config['menus'];
+				if ( class_exists( 'Base_Content' ) ) {
+					$posts = new Base_Content( $args );
+				}
+			}
+			*/
 
 			//@todo run debug (force files to be included from includes)
 		} else {

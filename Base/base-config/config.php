@@ -56,7 +56,7 @@ return array(
 			'singular' => 'WP Base Tax',
 			'plural' => 'WP Base Taxes',
 			'rewrite' => array( 'slug' => 'wp-base-tax', 'with_front' => false ),
-			'posts' => array( 'slider' ), 
+			'posts' => array( 'slider' ),
 		),
 		// taxonomy like tag
 		'wp-base-tag' => array(
@@ -89,6 +89,40 @@ return array(
 		'navigation-top' => __( 'Top Navigation Menu' ),
 		'navigation-foot' => __( 'Footer Navigation Menu' ),
 	),
+	'posts' => array(
+		'post' => array(
+			array(
+				"post_title" => "Base Theme Post One",
+				"post_content" => "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>",
+				"post_status" => "publish",
+				"post_excerpt" => "Lorem ipsum dolor sit amet",
+				"slug" => "bt-po",
+				'terms' => array(
+					"category" =>  array( 'Uncategorized', 'Lorem' ),
+					"post_tag" => "tag1, tag2, tag3",
+				),
+				"post_status" => 'publish',
+				'page_template' => 'page-template.tpl.php'
+			),
+			array(
+				"post_title" => "Base Theme Post Two",
+				"post_content" => "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>",
+				"post_status" => "publish",
+				"post_excerpt" => "Lorem ipsum dolor sit amet",
+				"slug" => "bt-pt",
+				'terms' => array(
+					"category" => array( 'Uncategorized', 'Lorem' ),
+					"post_tag" => "tag1, tag2, tag3",
+				),
+				"post_status" => 'publish',
+				'page_template' => 'page-template.tpl.php'
+			),
+		),
+		'cpt' => array(
+		),
+		'page' => array(
+		),
+	)
 );
 
 function custom_generate_field() {
