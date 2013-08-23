@@ -15,7 +15,7 @@
 
 # License
 
-WP Base Theme is licensed under the GPL v2 or later.
+WP Base Theme Framework is licensed under the GPL v2 or later.
 
 > This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License, version 2, as 
@@ -30,9 +30,9 @@ GNU General Public License for more details.
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-# WP Base Theme Description
+# WP Base Theme Framework Description
 
-WP Base Theme is being written to simplify the creation of WordPress powered Themes,
+WP Base Theme Framework is being written to simplify the creation of WordPress powered Themes,
 handling some functionality semi-automatically.
 
 Unlike other themes WP Base Theme doesn't include any kind of HTML or CSS. This is solely
