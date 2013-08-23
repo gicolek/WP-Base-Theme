@@ -1,6 +1,16 @@
 <?php
 
+/**
+ * Configuration array which stores all of the Base Theme functionality
+ * all code should be introduced from within this place
+ * 
+ */
 return array(
+	/*
+	 * Handle semi-auto script enqueuing
+	 * The function looks for each script within the _ui/js directory
+	 * enqueing it at the moment of register if enqueue parameter is set to true
+	 */
 	'scripts' => array(
 		'main' => array(
 			'handle' => 'main',
@@ -11,6 +21,12 @@ return array(
 			'enqueue' => true,
 		),
 	),
+	/*
+	 * Register Theme Options (visible under Appearance -> Theme Options)
+	 * Each array's key serves as option field name.
+	 * The options get added and validated automatically. 
+	 * In situation where custom option was needed custom callback methods can be defined.
+	 */
 	'settings' => array(
 		'opt1' => array(
 			'type' => 'text',
@@ -39,6 +55,11 @@ return array(
 			'desc' => 'Custom Field with callback functions',
 		),
 	),
+	/*
+	 * Registers Custom Post Types
+	 * The arguments are equal to those of: http://codex.wordpress.org/Function_Reference/register_post_type
+	 * The difference is that, there's much more defaults.
+	 */
 	'post_types' => array(
 		'slider' => array(
 			'labels' => array(
@@ -50,6 +71,10 @@ return array(
 			),
 		),
 	),
+	/*
+	 * Register custom taxonomies
+	 * http://codex.wordpress.org/Function_Reference/register_taxonomy
+	 */
 	'tax' => array(
 		// taxonomy like category
 		'wp-base-tax' => array(
@@ -67,9 +92,16 @@ return array(
 			'hierarchical' => false,
 		),
 	),
+	/*
+	 * Include any file from the includes subdirectory
+	 */
 	'includes' => array(
 		'shortcodes' => true,
 	),
+	/*
+	 * Add theme sidebars that will show up in the backend,
+	 * uses http://codex.wordpress.org/Function_Reference/register_sidebar 
+	 */
 	'sidebars' => array(
 		'base' => array(
 			'name' => __( "Sidebar-{counter}", WP_BASE_DOMAIN ),
@@ -85,10 +117,31 @@ return array(
 			'id' => "sidebar-rafal",
 		),
 	),
+	/*
+	 * Add navigation menus (they will show up in the Backend)
+	 * uses: http://codex.wordpress.org/Function_Reference/register_nav_menus
+	 */
 	'nav-menus' => array(
 		'navigation-top' => __( 'Top Navigation Menu' ),
 		'navigation-foot' => __( 'Footer Navigation Menu' ),
 	),
+	/*
+	 * Add specified image sizes.
+	 * This key being set, automatically adds theme support
+	 * for post thumbnails.
+	 */
+	'images' => array(
+		'400x500' => array(
+			'width' => '400',
+			'height' => '500',
+			'crop' => true,
+		),
+	),
+	/*
+	 * Add content, each posts array key is the name
+	 * of specific post type (post, page or any custom registered post)
+	 * rest of the content, array keys are equal to the args array: http://codex.wordpress.org/Function_Reference/register_post_type
+	 */
 	'posts' => array(
 		'post' => array(
 			array(
@@ -98,7 +151,7 @@ return array(
 				"post_excerpt" => "Lorem ipsum dolor sit amet",
 				"slug" => "bt-po",
 				'terms' => array(
-					"category" =>  array( 'Uncategorized', 'Lorem' ),
+					"category" => array( 'Uncategorized', 'Lorem' ),
 					"post_tag" => "tag1, tag2, tag3",
 				),
 				"post_status" => 'publish',
@@ -111,8 +164,8 @@ return array(
 				"post_excerpt" => "Lorem ipsum dolor sit amet",
 				"slug" => "bt-pt",
 				//'terms' => array(
-					//"category" => array( 'Uncategorized', 'Lorem' ),
-					//"post_tag" => "tag1, tag2, tag3",
+				//"category" => array( 'Uncategorized', 'Lorem' ),
+				//"post_tag" => "tag1, tag2, tag3",
 				//),
 				"post_status" => 'publish',
 				'page_template' => 'page-template.tpl.php'
@@ -125,6 +178,9 @@ return array(
 	)
 );
 
+/**
+ * Custom Theme Options Callback functio 
+ */
 function custom_generate_field() {
 	$options = get_option( 'base_options' );
 	if ( !empty( $options['custom'] ) ) {
@@ -134,7 +190,13 @@ function custom_generate_field() {
 		echo "<input id='custom' name='base_options[custom]' size='80' type='text' value='' />";
 }
 
+/**
+ * Custom Theme Options validate function
+ * 
+ * @param array $input
+ * @return array 
+ */
 function custom_validate_field($input) {
-	$valid = $input['custom'];
+	$valid = esc_attr( $input['custom'] );
 	return $valid;
 }

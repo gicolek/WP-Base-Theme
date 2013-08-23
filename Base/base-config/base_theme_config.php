@@ -23,7 +23,7 @@ class Base_Theme_Config {
 
 		$include_path = trailingslashit( get_template_directory() );
 
-		$config_file = $include_path . 'base-config/config.php';
+		$config_file = $include_path . '/config.php';
 
 		$config = require($config_file);
 
@@ -54,7 +54,7 @@ class Base_Theme_Config {
 				}
 			}
 
-			// add post types (see Base_Post_Types class for details)
+			// add post types (see Base_Tax class for details)
 			if ( array_key_exists( 'tax', $config ) ) {
 				require_once STYLESHEETPATH . '/base-config/plugins/tax.class';
 				$args = $config['tax'];
@@ -75,6 +75,7 @@ class Base_Theme_Config {
 			// register sidebars with default callback values
 			if ( array_key_exists( 'sidebars', $config ) ) {
 				$count_sidebars = 0;
+				
 				foreach ( $config['sidebars'] as $key => $sidebar ) {
 					++$count_sidebars;
 
@@ -97,7 +98,19 @@ class Base_Theme_Config {
 				register_nav_menus( $config['nav-menus'] );
 			}
 
-			// add posts
+			// add custom image sizes
+			if ( array_key_exists( 'images', $config ) ) {
+				
+				// enable post thumbnails 
+				add_theme_support( 'post-thumbnails' );
+				
+				// iterate through the images array and enable specific image sizes
+				foreach ( $config['images'] as $key => $image ) {
+					add_image_size( $key, $image['width'], $image['height'], $image['crop'] );
+				}
+			}
+
+			// add content 
 			if ( array_key_exists( 'posts', $config ) ) {
 				require_once STYLESHEETPATH . '/base-config/plugins/content.class.php';
 				$args = $config['posts'];
@@ -106,17 +119,6 @@ class Base_Theme_Config {
 				}
 			}
 
-			/*
-			if ( array_key_exists( 'menus', $config ) ) {
-				require_once STYLESHEETPATH . '/base-config/plugins/content.class.php';
-				$args = $config['menus'];
-				if ( class_exists( 'Base_Content' ) ) {
-					$posts = new Base_Content( $args );
-				}
-			}
-			*/
-
-			//@todo run debug (force files to be included from includes)
 		} else {
 			throw new Exception( 'No config values found or config is not an associative array' );
 		}
@@ -137,30 +139,6 @@ class Base_Theme_Config {
 		return !$has_index_key;
 	}
 
-	/**
-	 * Automatically generate pages based on the argument supplied
-	 * 
-	 * @todo @param {bool} $auto auto generate randomly named number of pages with Lorem Ipsum as content
-	 * @todo add WP default page
-	 * 
-	 * @param {array} $pages - array of pages
-	 * 
-	 * @return {bool}
-	 */
-	static function generate_pages($pages = array( ), $auto = false) {
-
-		foreach ( $pages as $key => $page ) {
-
-			$my_post = array(
-				'post_title' => $key,
-				'post_content' => isset( $page['content'] ) ? $page['content'] : '',
-				'post_status' => 'publish',
-				'post_type' => 'page'
-			);
-
-			wp_insert_post( $my_post );
-		}
-	}
 
 	/**
 	 * Utility to load front end scripts based on the config.php scripts array 

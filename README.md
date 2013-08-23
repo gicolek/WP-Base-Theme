@@ -1,6 +1,5 @@
 # Table of Contents
 
-* [License] (https://github.com/gicolek/WP-Base-Theme#license)
 * [WP Base Theme Description] (https://github.com/gicolek/WP-Base-Theme#wp-base-theme-description)
 * [Using config.php file] (https://github.com/gicolek/WP-Base-Theme#using-configphp-file)
 * [Scripts] (https://github.com/gicolek/WP-Base-Theme#scripts)
@@ -9,34 +8,20 @@
 * [Custom Taxonomies Creation] (https://github.com/gicolek/WP-Base-Theme#custom-taxonomies-creation)
 * [Auto Sidebar Registration] (https://github.com/gicolek/WP-Base-Theme#auto-sidebar-registration)
 * [Navigation Menus Registration] (https://github.com/gicolek/WP-Base-Theme#navigation-menus-registration)
-* [File	inclusions] (https://github.com/gicolek/WP-Base-Theme#file-inclusions)
+* [Content Filling] (https://github.com/gicolek/WP-Base-Theme#content-filling)
+* [Adding Image Sizes] (https://github.com/gicolek/WP-Base-Theme#adding-image-sizes)
+* [File	Inclusions] (https://github.com/gicolek/WP-Base-Theme#file-inclusions)
 * [Shortcodes] (https://github.com/gicolek/WP-Base-Theme#shortcodes)
+* [License] (https://github.com/gicolek/WP-Base-Theme#license)
 * [Todos List / Enhancements] (https://github.com/gicolek/WP-Base-Theme#todos-list--enhancements)
 
-# License
+# WP Base Theme Description
 
-WP Base Theme Framework is licensed under the GPL v2 or later.
-
-> This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License, version 2, as 
-published by the Free Software Foundation.
-
-> This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-> You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-
-# WP Base Theme Framework Description
-
-WP Base Theme Framework is being written to simplify the creation of WordPress powered Themes,
+WP Base Theme is a simple Framework being written to simplify the creation of WordPress powered Themes,
 handling some functionality semi-automatically.
 
-Unlike other themes WP Base Theme doesn't include any kind of HTML or CSS. This is solely
-a PHP project. I wanted to provide a good bese, reducing the amount of markup removal.
+WP Base Theme doesn't include any kind of HTML or CSS. This is solely
+a PHP project. I wanted to provide a good base for developers, reducing the amount of markup removal.
 
 The main idea is to run everything from a single destination, provided a config array.
 
@@ -44,7 +29,7 @@ The main idea is to run everything from a single destination, provided a config 
 > but I incorporated it in my own way, having seen the same among different 
 > repos here and there :))
 
-Moreover the theme contains most common files that are usually included
+Moreover it contains most common files that are usually included
 in most projects involving WP.
 
 The main thing is the base-config directory in which there are two important files:
@@ -72,7 +57,7 @@ return array(
 
 # Using config.php file
 
-*__Full, sample config file can be found within the base-config directory.__*
+*__Full, sample config file can be found within the theme's root directory.__*
 
 Currently there are automatic handlers for:
 
@@ -270,7 +255,19 @@ In the same way as above navigation menus can be created. WP Base Theme is makin
 usage of WP built in register_nav_menus() method. It's just here to provide functionality
 from one place
 
-## File inclusions
+## Content Filling
+
+In case any content was to be added, the 'posts' key should be added to the config array.
+It should contain an array of arrays (with post types (post, page, etc.) as each array's key)
+Each such post would then contain arguments similar to: http://codex.wordpress.org/Function_Reference/register_post_type
+Tag / Category addition is based on their names in the background
+
+## Adding Image Sizes
+
+Specyfing the 'image' key will enable post thumbnails and also add
+specific image sizes making usage of the http://codex.wordpress.org/Function_Reference/add_image_size
+
+## File Inclusions
 
 In case any extra files were supposed to be added, with some custom functionality
 this can be done via 
@@ -289,6 +286,24 @@ For sake of popularity of shortcodes I've added sample shortcodes.php
 file to the /includes directory, which gets loaded by default. 
 
 See its contents to find the working examples.
+
+# License
+
+WP Base Theme is licensed under the GPL v2 or later.
+
+> This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License, version 2, as 
+published by the Free Software Foundation.
+
+> This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+> You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
 
 # Todos List / Enhancements
 
