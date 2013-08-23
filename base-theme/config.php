@@ -145,17 +145,23 @@ return array(
 	'posts' => array(
 		'post' => array(
 			array(
-				"post_title" => "Base Theme Post One",
-				"post_content" => "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>",
-				"post_status" => "publish",
-				"post_excerpt" => "Lorem ipsum dolor sit amet",
-				"slug" => "bt-po",
+				'post_title' => "Base Theme Post One Featured",
+				'post_content' => "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>",
+				'post_status' => "publish",
+				'post_excerpt' => "Lorem ipsum dolor sit amet",
+				'slug' => "bt-po",
+				// set post terms categories need to extist up front
+				// or this will have no effect
 				'terms' => array(
-					"category" => array( 'Uncategorized', 'Lorem' ),
-					"post_tag" => "tag1, tag2, tag3",
+					'category' => array( 'Uncategorized', 'Lorem' ),
+					'post_tag' => "tag1, tag2, tag3",
 				),
-				"post_status" => 'publish',
-				'page_template' => 'page-template.tpl.php'
+				'post_status' => 'publish',
+				// the below will have no effect if the file wasn't present
+				'page_template' => 'page-template.tpl.php',
+				// needs to reside within the wp-content/uploads/dir
+				// will set post thumbnail and create all intermediate image sizes for that specific picture
+				'thumbnail' => 'screenshot.png'
 			),
 			array(
 				"post_title" => "Base Theme Post Two",
@@ -163,10 +169,6 @@ return array(
 				"post_status" => "publish",
 				"post_excerpt" => "Lorem ipsum dolor sit amet",
 				"slug" => "bt-pt",
-				//'terms' => array(
-				//"category" => array( 'Uncategorized', 'Lorem' ),
-				//"post_tag" => "tag1, tag2, tag3",
-				//),
 				"post_status" => 'publish',
 				'page_template' => 'page-template.tpl.php'
 			),

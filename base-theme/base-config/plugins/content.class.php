@@ -79,13 +79,62 @@ class Base_Content {
 					// set post page template
 					if ( array_key_exists( 'page_template', $post ) )
 						update_post_meta( $id, '_wp_page_template', $post['page_template'] );
+
+					// set post thumbnail
+					if ( array_key_exists( 'thumbnail', $post ) ) {
+						$this->set_thumbnail( $id, $post );
+					}
 				}
 			}
 		}
 	}
 
-	function add_pages() {
+	/**
+	 * Function that set posts thumbnail and
+	 * generates all intermediate image sizes 
+	 */
+	function set_thumbnail($id, $post) {
+
+		// upload the file
+		if ( !function_exists( 'wp_handle_upload' ) )
+			require_once( ABSPATH . 'wp-admin/includes/file.php' );
+		// include the neccessary image library
+		include( ABSPATH . 'wp-admin/includes/image.php' );
+
+		// get file filename
+		$filename = $post['thumbnail'];
+
+		// check the file mimetype
+		$wp_filetype = wp_check_filetype( basename( $filename ), null );
+
+		// get the uploads dir path
+		$wp_upload_dir = wp_upload_dir();
+
+		// set attachment to be added args
+		$args = array(
+			'guid' => $wp_upload_dir['url'] . DIRECTORY_SEPARATOR . basename( $filename ),
+			'post_mime_type' => $wp_filetype['type'],
+			'post_title' => preg_replace( '/\.[^.]+$/', '', basename( $filename ) ),
+			'post_content' => '',
+			'post_status' => 'inherit'
+		);
+
+		// insert attachment and get it's id
+		$attachment_id = wp_insert_attachment( $args, $filename, $id );
+
+		// get full path of that file
+		$fullsizepath = get_attached_file( $attachment_id );
 		
+		// generate intermediate image sizes
+		$attachment_data = wp_generate_attachment_metadata( $attachment_id, $fullsizepath );
+
+		// update attachement's metadata
+		$deb = wp_update_attachment_metadata( $attachment_id, $attachment_data );
+
+		var_dump( $filename );
+		var_dump( $deb );
+		// set posts's thumbnail to the newly created attachment
+		set_post_thumbnail( $id, $attachment_id );
 	}
 
 	function add_menus() {
