@@ -131,8 +131,6 @@ class Base_Content {
 		// update attachement's metadata
 		$deb = wp_update_attachment_metadata( $attachment_id, $attachment_data );
 
-		var_dump( $filename );
-		var_dump( $deb );
 		// set posts's thumbnail to the newly created attachment
 		set_post_thumbnail( $id, $attachment_id );
 	}
