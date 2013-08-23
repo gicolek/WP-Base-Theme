@@ -8,8 +8,8 @@
 return array(
 	/*
 	 * Handle semi-auto script enqueuing
-	 * The function looks for each script within the _ui/js directory
-	 * enqueing it at the moment of register if enqueue parameter is set to true
+	 * The function looks for each script within 
+	 * the _ui/js directory optionally enqueing it right away
 	 */
 	'scripts' => array(
 		'main' => array(
@@ -23,9 +23,9 @@ return array(
 	),
 	/*
 	 * Register Theme Options (visible under Appearance -> Theme Options)
-	 * Each array's key serves as option field name.
-	 * The options get added and validated automatically. 
-	 * In situation where custom option was needed custom callback methods can be defined.
+	 * Each key serves as option field name. The options get added and 
+	 * validated automatically. In situation where custom option was needed 
+	 * custom callback methods can be defined.
 	 */
 	'settings' => array(
 		'opt1' => array(
@@ -56,9 +56,9 @@ return array(
 		),
 	),
 	/*
-	 * Registers Custom Post Types
-	 * The arguments are equal to those of: http://codex.wordpress.org/Function_Reference/register_post_type
-	 * The difference is that, there's much more defaults.
+	 * Register Custom Post Types
+	 * The arguments are equal to those of:
+	 * http://codex.wordpress.org/Function_Reference/register_post_type
 	 */
 	'post_types' => array(
 		'slider' => array(
@@ -72,11 +72,12 @@ return array(
 		),
 	),
 	/*
-	 * Register custom taxonomies
+	 * Register Custom Taxonomies
+	 * The arguments are equal to those of:
 	 * http://codex.wordpress.org/Function_Reference/register_taxonomy
 	 */
 	'tax' => array(
-		// taxonomy like category
+		// hierarchical taxonomy like category
 		'wp-base-tax' => array(
 			'singular' => 'WP Base Tax',
 			'plural' => 'WP Base Taxes',
@@ -100,7 +101,7 @@ return array(
 	),
 	/*
 	 * Add theme sidebars that will show up in the backend,
-	 * uses http://codex.wordpress.org/Function_Reference/register_sidebar 
+	 * uses: http://codex.wordpress.org/Function_Reference/register_sidebar 
 	 */
 	'sidebars' => array(
 		'base' => array(
@@ -126,9 +127,8 @@ return array(
 		'navigation-foot' => __( 'Footer Navigation Menu' ),
 	),
 	/*
-	 * Add specified image sizes.
-	 * This key being set, automatically adds theme support
-	 * for post thumbnails.
+	 * Add specific image sizes.
+	 * Being set, automatically adds theme supporfor post thumbnails.
 	 */
 	'images' => array(
 		'400x500' => array(
@@ -138,9 +138,9 @@ return array(
 		),
 	),
 	/*
-	 * Add content, each posts array key is the name
-	 * of specific post type (post, page or any custom registered post)
-	 * rest of the content, array keys are equal to the args array: http://codex.wordpress.org/Function_Reference/register_post_type
+	 * Fill in the content, each key is the name of registered
+	 * post type (post, page or any custom registered post).
+	 * Uses: http://codex.wordpress.org/Function_Reference/register_post_type
 	 */
 	'posts' => array(
 		'post' => array(
@@ -179,7 +179,7 @@ return array(
 );
 
 /**
- * Custom Theme Options Callback functio 
+ * Custom Theme Options Callback function
  */
 function custom_generate_field() {
 	$options = get_option( 'base_options' );

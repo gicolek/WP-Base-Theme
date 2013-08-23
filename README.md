@@ -20,7 +20,7 @@
 WP Base Theme is a simple Framework being written to simplify the creation of WordPress powered Themes,
 handling some functionality semi-automatically.
 
-WP Base Theme doesn't include any kind of HTML or CSS. This is solely
+It doesn't include any kind of HTML or CSS. This is solely
 a PHP project. I wanted to provide a good base for developers, reducing the amount of markup removal.
 
 The main idea is to run everything from a single destination, provided a config array.
@@ -66,6 +66,8 @@ Currently there are automatic handlers for:
 * custom post types creation
 * auto sidebar registration
 * navigation menus registration
+* content filling
+* adding image sizes
 * file inclusions (so that it'd be easy to find out what files were loaded and easily turn them of 
 to debug the code)
 
@@ -312,4 +314,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 * Extend Settings class with more default functions
 * Extend WP_Widget class to provide functionality similar to the Settings class
 * Test, debug etc.
+* set post's featured image
+* add menus
 
