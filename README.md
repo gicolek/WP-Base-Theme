@@ -13,7 +13,6 @@
 * [File	Inclusions] (https://github.com/gicolek/WP-Base-Theme#file-inclusions)
 * [Shortcodes] (https://github.com/gicolek/WP-Base-Theme#shortcodes)
 * [License] (https://github.com/gicolek/WP-Base-Theme#license)
-* [Todos List / Enhancements] (https://github.com/gicolek/WP-Base-Theme#todos-list--enhancements)
 
 # WP Base Theme Description
 
@@ -306,14 +305,4 @@ GNU General Public License for more details.
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-
-# Todos List / Enhancements
-
-* Add more features:
-
-* Extend Settings class with more default functions
-* Extend WP_Widget class to provide functionality similar to the Settings class
-* Test, debug etc.
-* set post's featured image
-* add menus
 
