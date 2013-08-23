@@ -315,5 +315,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 * Extend WP_Widget class to provide functionality similar to the Settings class
 * Test, debug etc.
 * set post's featured image
-* add menus
+* add menus to the content editor
+* remove shit files outside to a new github repo (sample theme or whatsoever)
+* leave index / functions / css with some sample content in the middle
 
