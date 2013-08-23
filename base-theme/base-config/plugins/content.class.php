@@ -2,10 +2,6 @@
 
 /**
  * Facilitate creation of posts, pages and menus
- *  
- * // todo figure out if custom taxonomies are not hierarchical
- * // todo auto add a category?
- * // figure out why it adds only one post if terms are added
  * 
  * @package WordPress
  * @subpackage Base Theme
