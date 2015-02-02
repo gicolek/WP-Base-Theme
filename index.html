@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <title>WP Base Theme  by gicolek</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <h1>WP Base Theme </h1>
+        <h2>Used to simplify the development process.</h2>
+
+        <section id="downloads">
+          <a href="https://github.com/gicolek/WP-Base-Theme/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/gicolek/WP-Base-Theme/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/gicolek/WP-Base-Theme" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <h1>
+<a id="table-of-contents" class="anchor" href="#table-of-contents" aria-hidden="true"><span class="octicon octicon-link"></span></a>Table of Contents</h1>
+
+<ul>
+<li><a href="https://github.com/gicolek/WP-Base-Theme#wp-base-theme-description">WP Base Theme Description</a></li>
+<li><a href="https://github.com/gicolek/WP-Base-Theme#using-configphp-file">Using config.php file</a></li>
+<li><a href="https://github.com/gicolek/WP-Base-Theme#scripts">Scripts</a></li>
+<li><a href="https://github.com/gicolek/WP-Base-Theme#theme-options">Theme Options</a></li>
+<li><a href="https://github.com/gicolek/WP-Base-Theme#custom-post-types-creation">Custom Post Types Creation</a></li>
+<li><a href="https://github.com/gicolek/WP-Base-Theme#custom-taxonomies-creation">Custom Taxonomies Creation</a></li>
+<li><a href="https://github.com/gicolek/WP-Base-Theme#auto-sidebar-registration">Auto Sidebar Registration</a></li>
+<li><a href="https://github.com/gicolek/WP-Base-Theme#navigation-menus-registration">Navigation Menus Registration</a></li>
+<li><a href="https://github.com/gicolek/WP-Base-Theme#content-filling">Content Filling</a></li>
+<li><a href="https://github.com/gicolek/WP-Base-Theme#adding-image-sizes">Adding Image Sizes</a></li>
+<li><a href="https://github.com/gicolek/WP-Base-Theme#file-inclusions">File Inclusions</a></li>
+<li><a href="https://github.com/gicolek/WP-Base-Theme#shortcodes">Shortcodes</a></li>
+<li><a href="https://github.com/gicolek/WP-Base-Theme#license">License</a></li>
+</ul>
+
+<h1>
+<a id="wp-base-theme-description" class="anchor" href="#wp-base-theme-description" aria-hidden="true"><span class="octicon octicon-link"></span></a>WP Base Theme Description</h1>
+
+<p>WP Base Theme is a simple Framework being written to simplify the creation of WordPress powered Themes,
+handling some functionality semi-automatically.</p>
+
+<p>It doesn't include any kind of HTML or CSS. This is solely
+a PHP project. I wanted to provide a good base for developers, reducing the amount of markup removal.</p>
+
+<p>The main idea is to run everything from a single destination, provided a config array.</p>
+
+<blockquote>
+<p>(actually this is Weston Ruter's idea, see <a href="https://github.com/westonruter">https://github.com/westonruter</a>)
+but I incorporated it in my own way, having seen the same among different 
+repos here and there :))</p>
+</blockquote>
+
+<p>Moreover it contains most common files that are usually included
+in most projects involving WP.</p>
+
+<p>The main thing is the base-config directory in which there are two important files:</p>
+
+<ul>
+<li>base_theme_config.php</li>
+<li>config.php</li>
+</ul>
+
+<p>The former is a PHP class responsible for automatic handling of provided configuration
+The latter is the configuration array of config files, which has the following form:</p>
+
+<div class="highlight highlight-php"><pre><span class="pl-pse">&lt;?php</span><span class="pl-s2"></span>
+<span class="pl-s2"></span>
+<span class="pl-s2"><span class="pl-k">return</span> <span class="pl-s3">array</span>(</span>
+<span class="pl-s2">    <span class="pl-s1"><span class="pl-pds">'</span>key1<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s3">array</span>(</span>
+<span class="pl-s2">    ),</span>
+<span class="pl-s2">    <span class="pl-s1"><span class="pl-pds">'</span>key2<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s3">array</span>(</span>
+<span class="pl-s2">    ),</span>
+<span class="pl-s2">    <span class="pl-s1"><span class="pl-pds">'</span>key3<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s3">array</span>(</span>
+<span class="pl-s2">    ),</span>
+<span class="pl-s2">    <span class="pl-c">// etc.</span></span>
+<span class="pl-s2">);</span>
+<span class="pl-s2"></span></pre></div>
+
+<h1>
+<a id="using-configphp-file" class="anchor" href="#using-configphp-file" aria-hidden="true"><span class="octicon octicon-link"></span></a>Using config.php file</h1>
+
+<p><em><strong>Full, sample config file can be found within the theme's root directory.</strong></em></p>
+
+<p>Currently there are automatic handlers for:</p>
+
+<ul>
+<li>scripts</li>
+<li>theme options</li>
+<li>custom post types creation</li>
+<li>auto sidebar registration</li>
+<li>navigation menus registration</li>
+<li>content filling</li>
+<li>adding image sizes</li>
+<li>file inclusions (so that it'd be easy to find out what files were loaded and easily turn them of 
+to debug the code)</li>
+</ul>
+
+<h2>
+<a id="scripts" class="anchor" href="#scripts" aria-hidden="true"><span class="octicon octicon-link"></span></a>Scripts</h2>
+
+<p>WordPress will auto load scripts based on the config array, starting with scripts key.
+<strong>These should reside within _ui/js/ directory</strong> (Base Theme will throw an error in case
+the file didn't exist)</p>
+
+<div class="highlight highlight-php"><pre><span class="pl-s2"><span class="pl-s1"><span class="pl-pds">'</span>scripts<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s3">array</span>(</span>
+<span class="pl-s2">        <span class="pl-s1"><span class="pl-pds">'</span>main<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s3">array</span>(</span>
+<span class="pl-s2">            <span class="pl-s1"><span class="pl-pds">'</span>handle<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s1"><span class="pl-pds">'</span>main<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s2">            <span class="pl-s1"><span class="pl-pds">'</span>file<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s1"><span class="pl-pds">'</span>main.js<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s2">            <span class="pl-s1"><span class="pl-pds">'</span>enqueue<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-c1">true</span>,</span>
+<span class="pl-s2">            <span class="pl-s1"><span class="pl-pds">'</span>deps<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s3">array</span>(</span>
+<span class="pl-s2">                <span class="pl-s1"><span class="pl-pds">'</span>jquery<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s2">            ),</span>
+<span class="pl-s2">        ),</span>
+<span class="pl-s2">    ),</span></pre></div>
+
+<p>The above would include and enqueue main.js, giving it main handle.</p>
+
+<p>Since no in_footer parameter was specified it would get loaded in the footer by default
+Why? <a href="http://stackoverflow.com/questions/5329807/benefits-of-loading-js-at-the-bottom-as-opposed-to-the-top-of-the-document">http://stackoverflow.com/questions/5329807/benefits-of-loading-js-at-the-bottom-as-opposed-to-the-top-of-the-document</a></p>
+
+<h2>
+<a id="theme-options" class="anchor" href="#theme-options" aria-hidden="true"><span class="octicon octicon-link"></span></a>Theme Options</h2>
+
+<p>Base Theme supports semi-automatic of Appearance -&gt; Theme Options page, for example</p>
+
+<div class="highlight highlight-php"><pre><span class="pl-s2"><span class="pl-s1"><span class="pl-pds">'</span>settings<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s3">array</span>(</span>
+<span class="pl-s2">        <span class="pl-s1"><span class="pl-pds">'</span>opt1<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s3">array</span>(</span>
+<span class="pl-s2">            <span class="pl-s1"><span class="pl-pds">'</span>type<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s1"><span class="pl-pds">'</span>text<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s2">            <span class="pl-s1"><span class="pl-pds">'</span>name<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s1"><span class="pl-pds">'</span>input-text-1<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s2">            <span class="pl-s1"><span class="pl-pds">'</span>desc<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s1"><span class="pl-pds">'</span>Input type text test<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s2">        ),</span>
+<span class="pl-s2">        <span class="pl-s1"><span class="pl-pds">'</span>opt2<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s3">array</span>(</span>
+<span class="pl-s2">            <span class="pl-s1"><span class="pl-pds">'</span>type<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s1"><span class="pl-pds">'</span>text<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s2">            <span class="pl-s1"><span class="pl-pds">'</span>name<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s1"><span class="pl-pds">'</span>input-text-2<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s2">            <span class="pl-s1"><span class="pl-pds">'</span>desc<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s1"><span class="pl-pds">'</span>Input type text test 2<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s2">        ),</span>
+<span class="pl-s2">        <span class="pl-s1"><span class="pl-pds">'</span>opt3<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s3">array</span>(</span>
+<span class="pl-s2">            <span class="pl-s1"><span class="pl-pds">'</span>type<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s1"><span class="pl-pds">'</span>dropdown_pages<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s2">            <span class="pl-s1"><span class="pl-pds">'</span>name<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s1"><span class="pl-pds">'</span>dropdown-pages<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s2">            <span class="pl-s1"><span class="pl-pds">'</span>desc<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s1"><span class="pl-pds">'</span>Testing dropdown pages<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s2">        ),</span>
+<span class="pl-s2">        <span class="pl-s1"><span class="pl-pds">'</span>opt4<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s3">array</span>(</span>
+<span class="pl-s2">            <span class="pl-s1"><span class="pl-pds">'</span>type<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s1"><span class="pl-pds">'</span>wp_editor<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s2">            <span class="pl-s1"><span class="pl-pds">'</span>name<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s1"><span class="pl-pds">'</span>wp-editor<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s2">            <span class="pl-s1"><span class="pl-pds">'</span>desc<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s1"><span class="pl-pds">'</span>Testing WP Editor<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s2">        )</span>
+<span class="pl-s2">    ),</span></pre></div>
+
+<p>Would create 4 options:</p>
+
+<ul>
+<li>2 input text fields</li>
+<li>1 dropdown pages field</li>
+<li>1 wp editor field</li>
+</ul>
+
+<p>In case custom Theme Options were to be added Base Theme Supports custom callback functionality, for example:</p>
+
+<div class="highlight highlight-php"><pre><span class="pl-s2"><span class="pl-s1"><span class="pl-pds">'</span>settings<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s3">array</span>(</span>
+<span class="pl-s2">        <span class="pl-s1"><span class="pl-pds">'</span>custom<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s3">array</span>(</span>
+<span class="pl-s2">            <span class="pl-s1"><span class="pl-pds">'</span>generate_field_callback<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s1"><span class="pl-pds">'</span>custom_generate_field<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s2">            <span class="pl-s1"><span class="pl-pds">'</span>validate_field_callback<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s1"><span class="pl-pds">'</span>custom_validate_field<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s2">            <span class="pl-s1"><span class="pl-pds">'</span>name<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s1"><span class="pl-pds">'</span>custom<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s2">            <span class="pl-s1"><span class="pl-pds">'</span>desc<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s1"><span class="pl-pds">'</span>Custom Field with callback functions<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s2">        ),</span>
+<span class="pl-s2">),</span></pre></div>
+
+<p>Where custom callback functions could be of the following form:</p>
+
+<div class="highlight highlight-php"><pre><span class="pl-s2"><span class="pl-st">function</span> <span class="pl-en">custom_generate_field</span>() {</span>
+<span class="pl-s2">    <span class="pl-vo">$options</span> <span class="pl-k">=</span> get_option( <span class="pl-s1"><span class="pl-pds">'</span>base_options<span class="pl-pds">'</span></span> );</span>
+<span class="pl-s2">    <span class="pl-k">if</span> ( <span class="pl-k">!</span><span class="pl-s3">empty</span>( <span class="pl-vo">$options</span>[<span class="pl-s1"><span class="pl-pds">'</span>custom<span class="pl-pds">'</span></span>] ) ) {</span>
+<span class="pl-s2">        <span class="pl-s3">echo</span> <span class="pl-s1"><span class="pl-pds">"</span>&lt;input id='custom' name='base_options[custom]' size='80' type='text' value='{<span class="pl-vo">$options</span>[<span class="pl-s1"><span class="pl-pds">'</span>custom<span class="pl-pds">'</span></span>]}' /&gt;<span class="pl-pds">"</span></span>;</span>
+<span class="pl-s2">    }</span>
+<span class="pl-s2">    <span class="pl-k">else</span></span>
+<span class="pl-s2">        <span class="pl-s3">echo</span> <span class="pl-s1"><span class="pl-pds">"</span>&lt;input id='custom' name='base_options[custom]' size='80' type='text' value='' /&gt;<span class="pl-pds">"</span></span>;</span>
+<span class="pl-s2">}</span>
+<span class="pl-s2"></span>
+<span class="pl-s2"><span class="pl-st">function</span> <span class="pl-en">custom_validate_field</span>(<span class="pl-vo">$input</span>) {</span>
+<span class="pl-s2">    <span class="pl-vo">$valid</span> <span class="pl-k">=</span> <span class="pl-vo">$input</span>[<span class="pl-s1"><span class="pl-pds">'</span>custom<span class="pl-pds">'</span></span>];</span>
+<span class="pl-s2">    <span class="pl-k">return</span> <span class="pl-vo">$valid</span>;</span>
+<span class="pl-s2">}</span></pre></div>
+
+<p>They could be placed in an included file or at the bottom of the config.php.</p>
+
+<h2>
+<a id="custom-post-types-creation" class="anchor" href="#custom-post-types-creation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Custom Post Types Creation</h2>
+
+<p>Base Theme can also handle auto posts creation, for example:</p>
+
+<div class="highlight highlight-php"><pre><span class="pl-s2"><span class="pl-s1"><span class="pl-pds">'</span>post_types<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s3">array</span>(</span>
+<span class="pl-s2">        <span class="pl-s1"><span class="pl-pds">'</span>base_slider<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s3">array</span>(</span>
+<span class="pl-s2">            <span class="pl-s1"><span class="pl-pds">'</span>labels<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s3">array</span>(</span>
+<span class="pl-s2">                <span class="pl-s1"><span class="pl-pds">'</span>singular<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s1"><span class="pl-pds">'</span>Slider<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s2">                <span class="pl-s1"><span class="pl-pds">'</span>plural<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s1"><span class="pl-pds">'</span>Slider entries<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s2">            ),</span>
+<span class="pl-s2">            <span class="pl-s1"><span class="pl-pds">'</span>args<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s3">array</span>(</span>
+<span class="pl-s2">                <span class="pl-s1"><span class="pl-pds">'</span>supports<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s3">array</span>( <span class="pl-s1"><span class="pl-pds">'</span>title<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>editor<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>author<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>custom-fields<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>thumbnail<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>excerpt<span class="pl-pds">'</span></span> ),</span>
+<span class="pl-s2">            ),</span>
+<span class="pl-s2">        ),</span>
+<span class="pl-s2">    ),</span></pre></div>
+
+<p>Would create a slider post type supporting title, editor, author, custom-fields and a thumbnail</p>
+
+<p>Note: This shortcut makes usage of <a href="http://codex.wordpress.org/Function_Reference/register_post_type">http://codex.wordpress.org/Function_Reference/register_post_type</a></p>
+
+<p>Note: it is wise to always prefix CPT with some word, like base above</p>
+
+<h2>
+<a id="custom-taxonomies-creation" class="anchor" href="#custom-taxonomies-creation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Custom Taxonomies Creation</h2>
+
+<p>Base Theme facilitates creation of custom taxonomies</p>
+
+<div class="highlight highlight-php"><pre><span class="pl-s2"> <span class="pl-s1"><span class="pl-pds">'</span>tax<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s3">array</span>(</span>
+<span class="pl-s2">        <span class="pl-c">// taxonomy like category</span></span>
+<span class="pl-s2">        <span class="pl-s1"><span class="pl-pds">'</span>wp-base-tax<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s3">array</span>(</span>
+<span class="pl-s2">            <span class="pl-s1"><span class="pl-pds">'</span>singular<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s1"><span class="pl-pds">'</span>WP Base Tax<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s2">            <span class="pl-s1"><span class="pl-pds">'</span>plural<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s1"><span class="pl-pds">'</span>WP Base Taxes<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s2">            <span class="pl-s1"><span class="pl-pds">'</span>rewrite<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s3">array</span>( <span class="pl-s1"><span class="pl-pds">'</span>slug<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s1"><span class="pl-pds">'</span>wp-base-tax<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>with_front<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-c1">false</span> ),</span>
+<span class="pl-s2">            <span class="pl-s1"><span class="pl-pds">'</span>posts<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s3">array</span>( <span class="pl-s1"><span class="pl-pds">'</span>slider<span class="pl-pds">'</span></span> ), </span>
+<span class="pl-s2">        ),</span>
+<span class="pl-s2">        <span class="pl-c">// taxonomy like tag</span></span>
+<span class="pl-s2">        <span class="pl-s1"><span class="pl-pds">'</span>wp-base-tag<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s3">array</span>(</span>
+<span class="pl-s2">            <span class="pl-s1"><span class="pl-pds">'</span>singular<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s1"><span class="pl-pds">'</span>WP Base Tag<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s2">            <span class="pl-s1"><span class="pl-pds">'</span>plural<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s1"><span class="pl-pds">'</span>WP Base Tags<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s2">            <span class="pl-s1"><span class="pl-pds">'</span>rewrite<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s3">array</span>( <span class="pl-s1"><span class="pl-pds">'</span>slug<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s1"><span class="pl-pds">'</span>wp-base-tag<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>with_front<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-c1">false</span> ),</span>
+<span class="pl-s2">            <span class="pl-s1"><span class="pl-pds">'</span>posts<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s3">array</span>( <span class="pl-s1"><span class="pl-pds">'</span>base_slider<span class="pl-pds">'</span></span> ),</span>
+<span class="pl-s2">            <span class="pl-s1"><span class="pl-pds">'</span>hierarchical<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-c1">false</span>,</span>
+<span class="pl-s2">        ),</span>
+<span class="pl-s2">    ),</span></pre></div>
+
+<p>Would create two new taxonomies: one hierarhical like category and the other one non hierarchical
+like tag, both of these would be assigned to the base_slider post type:</p>
+
+<p>Note: This shortcut makes usage of: <a href="http://codex.wordpress.org/Function_Reference/register_taxonomy">http://codex.wordpress.org/Function_Reference/register_taxonomy</a></p>
+
+<h2>
+<a id="auto-sidebar-registration" class="anchor" href="#auto-sidebar-registration" aria-hidden="true"><span class="octicon octicon-link"></span></a>Auto Sidebar Registration</h2>
+
+<p>Provided config values of the following form:</p>
+
+<div class="highlight highlight-php"><pre><span class="pl-s2"><span class="pl-s1"><span class="pl-pds">'</span>sidebars<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s3">array</span>(</span>
+<span class="pl-s2">        <span class="pl-s1"><span class="pl-pds">'</span>sidebar-1<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s3">array</span>( ),</span>
+<span class="pl-s2">        <span class="pl-s1"><span class="pl-pds">'</span>sidebar-2<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s3">array</span>(</span>
+<span class="pl-s2">            <span class="pl-s1"><span class="pl-pds">'</span>name<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span>  __( <span class="pl-s1"><span class="pl-pds">"</span>Sidebar Rafal<span class="pl-pds">"</span></span>, <span class="pl-c1">WP_BASE_DOMAIN</span> ),</span>
+<span class="pl-s2">            <span class="pl-s1"><span class="pl-pds">'</span>id<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s1"><span class="pl-pds">"</span>sidebar-rafal<span class="pl-pds">"</span></span>,</span>
+<span class="pl-s2">        ),</span>
+<span class="pl-s2">    ),</span></pre></div>
+
+<p>Two sidebars will be created:</p>
+
+<ul>
+<li>sidebar-1 with default values, that is:</li>
+</ul>
+
+<div class="highlight highlight-php"><pre><span class="pl-s2">        <span class="pl-s1"><span class="pl-pds">'</span>name<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> __( <span class="pl-s1"><span class="pl-pds">'</span>Sidebar<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>wpized_light<span class="pl-pds">'</span></span> ),</span>
+<span class="pl-s2">        <span class="pl-s1"><span class="pl-pds">'</span>id<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s1"><span class="pl-pds">'</span>sidebar-1<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s2">        <span class="pl-s1"><span class="pl-pds">'</span>before_widget<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s1"><span class="pl-pds">'</span>&lt;section id="%1$s"class="sidebar-widget-menu %2$s"&gt;<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s2">        <span class="pl-s1"><span class="pl-pds">'</span>after_widget<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s1"><span class="pl-pds">"</span>&lt;/section&gt;<span class="pl-pds">"</span></span>,</span>
+<span class="pl-s2">        <span class="pl-s1"><span class="pl-pds">'</span>before_title<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s1"><span class="pl-pds">'</span>&lt;h3&gt;<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s2">        <span class="pl-s1"><span class="pl-pds">'</span>after_title<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s1"><span class="pl-pds">'</span>&lt;/h3&gt;<span class="pl-pds">'</span></span>,</span></pre></div>
+
+<ul>
+<li>sidebar-2 with custom name and id arguments.</li>
+</ul>
+
+<p>This approach provides some flexibility and allows simple sidebar creation, without
+the need of code repetition.</p>
+
+<h2>
+<a id="navigation-menus-registration" class="anchor" href="#navigation-menus-registration" aria-hidden="true"><span class="octicon octicon-link"></span></a>Navigation Menus Registration</h2>
+
+<p>Example:</p>
+
+<div class="highlight highlight-php"><pre><span class="pl-s2"><span class="pl-s1"><span class="pl-pds">'</span>nav-menus<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s3">array</span>(</span>
+<span class="pl-s2">        <span class="pl-s1"><span class="pl-pds">'</span>navigation-top<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> __( <span class="pl-s1"><span class="pl-pds">'</span>Top Navigation Menu<span class="pl-pds">'</span></span> ),</span>
+<span class="pl-s2">        <span class="pl-s1"><span class="pl-pds">'</span>navigation-foot<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> __( <span class="pl-s1"><span class="pl-pds">'</span>Footer Navigation Menu<span class="pl-pds">'</span></span> ),</span>
+<span class="pl-s2">    )</span></pre></div>
+
+<p>In the same way as above navigation menus can be created. WP Base Theme is making 
+usage of WP built in register_nav_menus() method. It's just here to provide functionality
+from one place</p>
+
+<h2>
+<a id="content-filling" class="anchor" href="#content-filling" aria-hidden="true"><span class="octicon octicon-link"></span></a>Content Filling</h2>
+
+<p>In case any content was to be added, the 'posts' key should be added to the config array.
+It should contain an array of arrays (with post types (post, page, etc.) as each array's key)
+Each such post would then contain arguments similar to: <a href="http://codex.wordpress.org/Function_Reference/register_post_type">http://codex.wordpress.org/Function_Reference/register_post_type</a>
+Tag / Category addition is based on their names in the background</p>
+
+<h2>
+<a id="adding-image-sizes" class="anchor" href="#adding-image-sizes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Adding Image Sizes</h2>
+
+<p>Specyfing the 'image' key will enable post thumbnails and also add
+specific image sizes making usage of the <a href="http://codex.wordpress.org/Function_Reference/add_image_size">http://codex.wordpress.org/Function_Reference/add_image_size</a></p>
+
+<h2>
+<a id="file-inclusions" class="anchor" href="#file-inclusions" aria-hidden="true"><span class="octicon octicon-link"></span></a>File Inclusions</h2>
+
+<p>In case any extra files were supposed to be added, with some custom functionality
+this can be done via </p>
+
+<div class="highlight highlight-php"><pre><span class="pl-s2"><span class="pl-s1"><span class="pl-pds">'</span>includes<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s3">array</span>(</span>
+<span class="pl-s2">        <span class="pl-s1"><span class="pl-pds">'</span>shortcodes<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-c1">true</span>,</span>
+<span class="pl-s2">    ),</span></pre></div>
+
+<p>Base Theme would include the shortcodes.php file from the <strong>includes</strong> directory.</p>
+
+<h2>
+<a id="shortcodes" class="anchor" href="#shortcodes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Shortcodes</h2>
+
+<p>For sake of popularity of shortcodes I've added sample shortcodes.php
+file to the /includes directory, which gets loaded by default. </p>
+
+<p>See its contents to find the working examples.</p>
+
+<h1>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h1>
+
+<p>WP Base Theme is licensed under the GPL v2 or later.</p>
+
+<blockquote>
+<p>This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License, version 2, as 
+published by the Free Software Foundation.</p>
+
+<p>This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+
+<p>You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA</p>
+</blockquote>
+      </section>
+    </div>
+
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-12115239");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
