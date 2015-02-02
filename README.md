@@ -16,6 +16,8 @@
 
 # WP Base Theme Description
 
+(for a more visually appealing description see: http://gicolek.github.io/WP-Base-Theme/)
+
 WP Base Theme is a simple Framework being written to simplify the creation of WordPress powered Themes,
 handling some functionality semi-automatically.
 
